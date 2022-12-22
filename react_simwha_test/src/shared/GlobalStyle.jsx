@@ -1,23 +1,36 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    outline : none;
-    font-family: 'Noto Sans KR', sans-serif;
-  }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-  body {
-    overflow: hidden;
-  }
+textarea,
+pre {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
 
+* {
+  box-sizing: border-box;
+}
+ 
+@media (prefers-color-scheme: dark) {
   html {
-    font-size: 10px;
+    color-scheme: dark;
   }
+  body {
+    color: white;
+    background: black;
+  }
+}
 `;
 
 export default GlobalStyle;
