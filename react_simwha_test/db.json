@@ -9,10 +9,67 @@
   ],
   "posts": [
     {
-      "user_id": 1519211809934,
-      "post_id": 1519211810362,
-      "title": "title",
-      "content": "content"
+      "user_id": "miyoung",
+      "id": 1671780924184,
+      "title": "asdfasㅁㅇㄴㄹ",
+      "content": "<p>asdfadsfㅁㄴㅇㄹ</p>",
+      "rate": 5
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671780931595,
+      "title": "123",
+      "content": "<p>123</p>",
+      "rate": 5
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671782077101,
+      "title": "ㅁㄴㅇㄹ",
+      "content": "<p>ㅁㄴㄹ</p>",
+      "rate": 0
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671782166860,
+      "title": "ㅁㄴㅇㄹ",
+      "content": "<p>ㅁㄹㅇㄹㅁㅇ</p>",
+      "rate": 0
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671791498019,
+      "title": "",
+      "content": "<p>sadfsadfsadfsadf</p>",
+      "rate": 0
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671791876511,
+      "title": "",
+      "content": "<p>aasdfasdfasdf</p>",
+      "rate": 0
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671791890515,
+      "title": "",
+      "content": "<p>안녕하세요</p><p>안녕</p><p>안녕</p><p><br></p>",
+      "rate": 0
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671791913275,
+      "title": "",
+      "content": "<p>안녕하세요</p><p>안녕</p><p><br></p>",
+      "rate": 0
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671795232252,
+      "title": "1234",
+      "content": "<p>1234ㅁㅁㅁㅁ</p>",
+      "rate": 3
     }
   ],
   "comments": [

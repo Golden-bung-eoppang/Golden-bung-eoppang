@@ -1,18 +1,82 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import ReactStars from 'react-rating-stars-component';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Editor from '../components/Editor';
+import {__addWriteThunk} from '../redux/modules/addupdateSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import axios from 'axios';
+import { render } from 'react-dom';
+import ReactHtmlParser from 'react-html-parser';
+
 const Write = () => {
+  const dispatch = useDispatch();
+
+  
+  const [content, setContent] = useState('');
+  // console.log(content)
+
+  // handler
+  const onClickSubmitWriteHandler = (e) => {
+    e.preventDefault();
+
+    const newpost = {
+      user_id: 'miyoung',
+      id: Date.now(),
+      title,
+      content,
+      rate,
+    };
+
+    dispatch(__addWriteThunk(newpost));
+
+  };
+
+  // 제목
+  const [title, setTitle] = useState('');
+  const onChangeTitleHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+
+  // 별점 라이브러리
+  const [rate, setRate] = useState(0);
+  const ratingChanged = (newRating) => {
+    setRate(newRating);
+  };
+
+
+
   return (
     <Layout>
       <StyledP>✏️ 우리동네의 붕어빵 맛집을 알려주세요.</StyledP>
-      <WirteContainer>
-        <StyledInput placeholder='제목을 입력해주세요.' />
-        <Editor />
-      </WirteContainer>
-      <Flex>
-        <AddButton>등록</AddButton>
-      </Flex>
+      <form onSubmit={onClickSubmitWriteHandler}>
+        <WirteContainer>
+          <Flex
+            alingItems='center'
+            borderBottom='3px solid #f2d589'
+            width='250px'
+          >
+            <Star>만족도ㅤ</Star>
+            <ReactStars
+              size={30}
+              activeColor='#f2d589'
+              onChange={ratingChanged}
+            />
+          </Flex>
+
+          <StyledInput
+            placeholder='제목을 입력해주세요.'
+            value={title}
+            onChange={onChangeTitleHandler}
+          />
+          <Editor setContent={setContent} content={content} />
+          <Flex justifyCt='right' marginTop='60px'>
+            <AddButton>등록</AddButton>
+          </Flex>
+        </WirteContainer>
+      </form>
+      <div>{ReactHtmlParser(content)}</div>
     </Layout>
   );
 };
@@ -47,8 +111,11 @@ const StyledInput = styled.input`
 
 const Flex = styled.div`
   display: flex;
-  justify-content: right;
-  margin-top: 60px;
+  justify-content: ${(props) => props.justifyCt};
+  align-items: ${(props) => props.alingItems};
+  margin-top: ${(props) => props.marginTop};
+  border-bottom: ${(props) => props.borderBottom};
+  width: ${(props) => props.width};
 `;
 
 const AddButton = styled.button`
@@ -65,6 +132,11 @@ const AddButton = styled.button`
     width: 95px;
     height: 35px;
   }
+`;
+
+const Star = styled.span`
+  font-size: 20px;
+  display: inline;
 `;
 
 export default Write;
