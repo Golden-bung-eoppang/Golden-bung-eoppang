@@ -8,6 +8,7 @@ const Home = () => {
   return (
     <Layout>
       <MainBox>
+        {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
           <DropdownButton id='dropdown-item-button' title='---정렬---'>
             <Dropdown.Item as='button'>전체</Dropdown.Item>
@@ -16,8 +17,11 @@ const Home = () => {
           </DropdownButton>
         </SortBox>
 
+        {/* 글목록 */}
         <ItemContainer>
           <Items>
+
+            {/* 글 */}
             <Item>
               <RatingBox>별점나오는곳</RatingBox>
               <TitleBox>
@@ -78,6 +82,8 @@ const Home = () => {
               </ContentBox>
               <UserNameBox>유저이름</UserNameBox>
             </Item>
+
+            
           </Items>
         </ItemContainer>
       </MainBox>
