@@ -126,6 +126,13 @@
       "title": "",
       "content": "<p><strong>안녕하세요</strong></p><p><u>안녕하세요</u></p><h1>안녕하세요</h1>",
       "rate": 2
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1671879050706,
+      "title": "asdf",
+      "content": "<p>asfd</p>",
+      "rate": 0
     }
   ],
   "comments": [
