@@ -70,7 +70,7 @@ const Write = () => {
             value={title}
             onChange={onChangeTitleHandler}
           />
-          <Editor setContent={setContent} content={content} />
+          <Editor setContent={setContent} />
           <Flex justifyCt='right' marginTop='60px'>
             <AddButton>등록</AddButton>
           </Flex>
