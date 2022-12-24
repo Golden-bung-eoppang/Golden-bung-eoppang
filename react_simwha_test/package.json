@@ -18,6 +18,7 @@
     "react-uuid": "^2.0.0",
     "styled-components": "^5.3.6",
     "uuid": "^9.0.0",
+    "weather-styled-icon": "^3.3.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
