@@ -3,7 +3,7 @@ import ReactStars from 'react-rating-stars-component';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Editor from '../components/Editor';
-import {__addWriteThunk} from '../redux/modules/addupdateSlice';
+import {__addWriteThunk, __getPostThunk} from '../redux/modules/addupdateSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import { render } from 'react-dom';
@@ -11,8 +11,6 @@ import ReactHtmlParser from 'react-html-parser';
 
 const Write = () => {
   const dispatch = useDispatch();
-
-  
   const [content, setContent] = useState('');
   // console.log(content)
 
@@ -45,6 +43,11 @@ const Write = () => {
     setRate(newRating);
   };
 
+  useEffect(() => {
+    
+    dispatch(__getPostThunk());
+  }, [])
+
 
 
   return (
@@ -76,7 +79,11 @@ const Write = () => {
           </Flex>
         </WirteContainer>
       </form>
-      <div>{ReactHtmlParser(content)}</div>
+      <div>
+        {
+          
+        }
+      </div>
     </Layout>
   );
 };

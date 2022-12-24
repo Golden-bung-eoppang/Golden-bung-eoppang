@@ -3,11 +3,25 @@ import axios from 'axios';
 
 
 export const __addWriteThunk = createAsyncThunk(
-  'addWirte', // action value
+  'ADD_WRITE', // action value
   async (payload, thunkAPI) => { // 콜백함수
     try {
       const { data } = await axios.post(`http://localhost:3001/posts`,payload);
-      console.log(data)
+      // console.log(data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+
+export const __getPostThunk = createAsyncThunk(
+  'GET_TODO',
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/posts`, payload);
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,11 +54,11 @@ const initialState = {
 };
 
 export const addupdateSlice = createSlice({
-  name: 'addWirte',
+  name: 'posts',
   initialState,
   reducers: {
     addPost: (state) => {
-      state.contents = {
+      state.posts = {
         user_id: 'miyoung',
         id: Date.now(),
         title: '',
@@ -63,6 +77,17 @@ export const addupdateSlice = createSlice({
       state.error = action.payload;
     },
     [__addWriteThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getPostThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.posts = action.payload;
+    },
+    [__getPostThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__getPostThunk.pending]: (state) => {
       state.isLoading = true;
     },
     // [__updateTodoThunk.fulfilled]: (state, action) => {
