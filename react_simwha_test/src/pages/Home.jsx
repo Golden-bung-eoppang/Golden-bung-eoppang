@@ -115,7 +115,7 @@ const Items = styled.ul`
   padding: 0;
   box-sizing: inherit;
 `;
-const Item = styled.a`
+const Item = styled.div`
   opacity: 1;
   display: flex;
   flex-direction: column;
@@ -130,18 +130,8 @@ const Item = styled.a`
   cursor: pointer;
   transition: 0.2s;
   box-sizing: inherit;
-  &:link {
-    text-decoration: none;
-    color: #f2d589;
-  }
-  &:visited {
-    text-decoration: none;
-    color: #f2d589;
-  }
-  &:active {
-    text-decoration: none;
-    color: #f2d589;
-  }
+
+
   &:hover {
     text-decoration: none;
     color: #f2d589;
