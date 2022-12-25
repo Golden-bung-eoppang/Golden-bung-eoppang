@@ -23,7 +23,7 @@ pre {
   box-sizing: border-box;
 }
  
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -31,7 +31,7 @@ pre {
     color: white;
     background: black;
   }
-}
+} */
 `;
 
 export default GlobalStyle;
