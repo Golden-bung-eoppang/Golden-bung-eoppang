@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import axios from "axios";
-import styled from "styled-components";
-
+import React, {useState} from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import iconimg from '../img/iconimg.png';
+import moveimg from '../img/excited.gif';
 export default function Weather() {
-  const [location, setLocation] = useState("");
-  const [weatherResult, setWeatherResult] = useState("");
+  const [location, setLocation] = useState('');
+  const [weatherResult, setWeatherResult] = useState('');
 
-  const API_KEY = "30ccac4351c9964310cd3cce7aceb7d3";
+  const API_KEY = '30ccac4351c9964310cd3cce7aceb7d3';
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
 
   const searchWeather = async (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       try {
         const data = await axios({
-          method: "get",
+          method: 'get',
           url,
         });
         setWeatherResult(data);
       } catch (err) {
-        alert("잘못된 지역이름입니다");
+        alert('잘못된 지역이름입니다');
       }
     }
   };
@@ -33,76 +34,117 @@ export default function Weather() {
   // }
 
   return (
-    <>
-      <input
-        style={{
-          marginTop: "10px",
-          width: "100px",
-          height: "30px",
-          backgroundColor: "rgba( 255, 255, 50, 0.5 ) ",
-
-          borderRadius: "8px",
-          marginLeft: "5px",
-          border: "2px solid #000000",
-          color: "black",
-        }}
-        placeholder="Add City"
+    <HeaderContianer>
+      <CityInputBox
+        placeholder='Add City'
         value={location}
         onChange={(e) => setLocation(e.target.value)}
-        type="text"
+        type='text'
         onKeyDown={searchWeather}
       />
 
       {Object.keys(weatherResult).length !== 0 && (
         <>
+          <TextBox>
+            <ImgBox src={moveimg} />
+            <Texts>
+              오늘 황금잉어빵 &nbsp;
+              {Math.abs(
+                Math.floor((weatherResult.data.main.temp - 273.15) * 10) / 10
+              ).toFixed(0)}
+              개 추천합니다&nbsp;(덥던 춥던 드세요)
+            </Texts>
+            <ImgBox src={moveimg} />
+          </TextBox>
+
           <ResultWrap>
-            <City>{weatherResult.data.name}</City>
+            <City>{weatherResult.data.name}&nbsp;&nbsp;&nbsp;</City>
+
             <Temp>
               {Math.round((weatherResult.data.main.temp - 273.15) * 10) / 10}
-              °C
+              °C &nbsp;&nbsp;&nbsp;
             </Temp>
-
             <TodayWeather>
               현재날씨
               <SkyStatus>{weatherResult.data.weather[0].main}</SkyStatus>
             </TodayWeather>
           </ResultWrap>
-          {/* <div style={{ marginLeft: "10px", marginTop: "5px" }}> */}
-          🫵오늘 황금잉어빵 &nbsp;
-          {Math.abs(
-            Math.floor((weatherResult.data.main.temp - 273.15) * 10) / 10
-          ).toFixed(0)}
-          개 추천합니다&nbsp;(덥던 춥던 드세요) 🫵
-          {/* </div> */}
         </>
       )}
-    </>
+    </HeaderContianer>
   );
 }
 
+const Texts = styled.span`
+  position: relative;
+  top: -5px;
+`
+const HeaderContianer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 650px;
+  flex-wrap: wrap;
+  margin: auto;
+`
+const TextBox = styled.div`
+  height: 40px;
+  border: 3px solid #ffcd00;
+  display: inline-block;
+  /* position: absolute;
+  top: 63px; */
+  font-size: 20px;
+`;
+
+const ImgBox = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
 const ResultWrap = styled.div`
   display: flex;
-  float: right;
-  flex-direction: column;
+  /* float: right; */
+  flex-direction: row;
   align-content: center;
-  margin-right: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-top:15px;
   border: 1px solid #ffcd00;
   border-radius: 8px;
-  background-color: rgba(255, 255, 50, 0.5);
+  background-color: #ffcd00;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+`;
+const CityInputBox = styled.input`
+  width: 150px;
+  height: 40px;
+  background-color: #ffcd00;
+  padding: 5px;
+  border: 2px solid #ffcd00;
+  color: black;
+  font-weight: 700;
+  &:focus {
+    outline: none;
+  }
+  margin: 0 0 0 10px;
+  position: relative;
+  font-size: 25px;
+  text-align: center;
 `;
 
 const City = styled.div`
   margin-left: auto;
+  font-size: 23px;
 `;
 
 const TodayWeather = styled.div`
-  float: right;
   margin-left: auto;
+  font-size: 20px;
 `;
 
 const SkyStatus = styled.div`
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 25px;
 `;
 
 const Temp = styled.div`
