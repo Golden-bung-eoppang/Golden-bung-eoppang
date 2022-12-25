@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "../redux/modules/modalSlice";
 import HomeSignModal from "./home/HomeSignModal";
 
 const Header = () => {
-  const [isModal, setIsModal] = useState(true);
+  const dispatch = useDispatch();
+  const signModal = useSelector(({ modal }) => modal);
+
   return (
     <>
-      nav
-      {isModal && <HomeSignModal />}
+      <button onClick={() => dispatch(openModal())}>sign</button>
+      {signModal && <HomeSignModal />}
     </>
   );
 };
