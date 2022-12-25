@@ -1,9 +1,12 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { closeModal } from "../../redux/modules/modalSlice";
 
 const HomeSignModalHeader = () => {
+  const dispatch = useDispatch();
   return (
     <Container>
-      <CancelButton>X</CancelButton>
+      <CancelButton onClick={() => dispatch(closeModal())}>X</CancelButton>
     </Container>
   );
 };

@@ -27,8 +27,8 @@ const Background = styled.div`
   background-color: rgba(249, 249, 249, 0.85);
 `;
 const Container = styled.div`
-  width: 600px;
-  height: 550px;
+  width: 480px;
+  height: 500px;
   animation: 0.4s ease-in-out;
   box-shadow: rgb(0 0 0 / 9%) 0px 2px 12px 0px;
   display: flex;
