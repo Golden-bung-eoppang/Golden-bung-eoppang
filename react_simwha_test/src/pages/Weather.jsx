@@ -23,6 +23,15 @@ export default function Weather() {
     }
   };
 
+  // const weatherTemp = Math.abs(
+  //   Math.round((weatherResult.data.main.temp - 273.15) * 10) / 10
+  // );
+  // console.log(weatherTemp);
+
+  // const checkWeatherTemp=()=>{
+  //   if()
+  // }
+
   return (
     <>
       <input
@@ -61,9 +70,9 @@ export default function Weather() {
           {/* <div style={{ marginLeft: "10px", marginTop: "5px" }}> */}
           🫵오늘 황금잉어빵 &nbsp;
           {Math.abs(
-            Math.round((weatherResult.data.main.temp - 273.15) * 10) / 10
-          )}
-          개 먹으세요 🫵
+            Math.floor((weatherResult.data.main.temp - 273.15) * 10) / 10
+          ).toFixed(0)}
+          개 추천합니다&nbsp;(덥던 춥던 드세요) 🫵
           {/* </div> */}
         </>
       )}
