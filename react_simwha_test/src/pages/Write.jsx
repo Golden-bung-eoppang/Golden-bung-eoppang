@@ -1,17 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import ReactStars from 'react-rating-stars-component';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
-import Editor from '../components/Editor';
-import {__addWriteThunk, __getPostThunk} from '../redux/modules/addupdateSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
-import { render } from 'react-dom';
-import ReactHtmlParser from 'react-html-parser';
+import React, { useEffect, useState } from "react";
+import ReactStars from "react-rating-stars-component";
+import styled from "styled-components";
+import Layout from "../components/Layout";
+import Editor from "../components/Editor";
+import {
+  __addWriteThunk,
+  __getPostThunk,
+} from "../redux/modules/addupdateSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { render } from "react-dom";
+import ReactHtmlParser from "react-html-parser";
 
 const Write = () => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   // console.log(content)
 
   // handler
@@ -19,7 +22,7 @@ const Write = () => {
     e.preventDefault();
 
     const newpost = {
-      user_id: 'miyoung',
+      user_id: "miyoung",
       id: Date.now(),
       title,
       content,
@@ -27,15 +30,13 @@ const Write = () => {
     };
 
     dispatch(__addWriteThunk(newpost));
-
   };
 
   // 제목
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const onChangeTitleHandler = (e) => {
     setTitle(e.target.value);
   };
-
 
   // 별점 라이브러리
   const [rate, setRate] = useState(0);
@@ -44,11 +45,8 @@ const Write = () => {
   };
 
   useEffect(() => {
-    
     dispatch(__getPostThunk());
-  }, [])
-
-
+  }, []);
 
   return (
     <Layout>
@@ -56,34 +54,30 @@ const Write = () => {
       <form onSubmit={onClickSubmitWriteHandler}>
         <WirteContainer>
           <Flex
-            alingItems='center'
-            borderBottom='3px solid #f2d589'
-            width='250px'
+            alingItems="center"
+            borderBottom="3px solid #f2d589"
+            width="250px"
           >
             <Star>만족도ㅤ</Star>
             <ReactStars
               size={30}
-              activeColor='#f2d589'
+              activeColor="#f2d589"
               onChange={ratingChanged}
             />
           </Flex>
 
           <StyledInput
-            placeholder='제목을 입력해주세요.'
+            placeholder="제목을 입력해주세요."
             value={title}
             onChange={onChangeTitleHandler}
           />
           <Editor setContent={setContent} />
-          <Flex justifyCt='right' marginTop='60px'>
+          <Flex justifyCt="right" marginTop="60px">
             <AddButton>등록</AddButton>
           </Flex>
         </WirteContainer>
       </form>
-      <div>
-        {
-          
-        }
-      </div>
+      <div>{}</div>
     </Layout>
   );
 };

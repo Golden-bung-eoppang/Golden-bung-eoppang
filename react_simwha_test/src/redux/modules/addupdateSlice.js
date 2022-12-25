@@ -1,12 +1,12 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const __addWriteThunk = createAsyncThunk(
-  'ADD_WRITE', // action value
-  async (payload, thunkAPI) => { // 콜백함수
+  "ADD_WRITE", // action value
+  async (payload, thunkAPI) => {
+    // 콜백함수
     try {
-      const { data } = await axios.post(`http://localhost:3001/posts`,payload);
+      const { data } = await axios.post(`http://localhost:3001/posts`, payload);
       // console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -15,13 +15,11 @@ export const __addWriteThunk = createAsyncThunk(
   }
 );
 
-
 export const __getPostThunk = createAsyncThunk(
-  'GET_TODO',
+  "GET_TODO",
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(`http://localhost:3001/posts`, payload);
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -42,28 +40,22 @@ export const __getPostThunk = createAsyncThunk(
 // );
 
 const initialState = {
-  posts: {
-    user_id: 'miyoung',
-    id: Date.now(),
-    title: '',
-    content: '',
-    rate: '',
-  },
+  posts: [],
   error: null, // 서버랑 통신 실패 시 나타내는 에러메세지 담아놓는 값
   isLoading: false, // 서버에서 posts를 가져오는 상태값
 };
 
 export const addupdateSlice = createSlice({
-  name: 'posts',
+  name: "posts",
   initialState,
   reducers: {
     addPost: (state) => {
       state.posts = {
-        user_id: 'miyoung',
+        user_id: "miyoung",
         id: Date.now(),
-        title: '',
-        content: '',
-        rate: '',
+        title: "",
+        content: "",
+        rate: "",
       };
     },
   },
@@ -104,5 +96,5 @@ export const addupdateSlice = createSlice({
   },
 });
 
-export const {addPost} = addupdateSlice.actions;
+export const { addPost } = addupdateSlice.actions;
 export default addupdateSlice.reducer;

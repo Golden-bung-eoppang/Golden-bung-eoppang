@@ -1,89 +1,51 @@
-import React from 'react';
-import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom';
-import Layout from '../components/Layout';
-import {Dropdown, DropdownButton} from 'react-bootstrap';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { __getPostThunk } from "../redux/modules/addupdateSlice";
+import ReactHtmlParser from "react-html-parser";
+import ReactStars from "react-rating-stars-component";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.addupdateSlice.posts);
+  console.log(posts);
+
+  useEffect(() => {
+    dispatch(__getPostThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("posts: ", posts);
+  }, [posts]);
+
   return (
     <Layout>
       <MainBox>
         {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
-          <DropdownButton id='dropdown-item-button' title='---정렬---'>
-            <Dropdown.Item as='button'>전체</Dropdown.Item>
-            <Dropdown.Item as='button'>조회순</Dropdown.Item>
-            <Dropdown.Item as='button'>평점순</Dropdown.Item>
+          <DropdownButton id="dropdown-item-button" title="---정렬---">
+            <Dropdown.Item as="button">전체</Dropdown.Item>
+            <Dropdown.Item as="button">평점순</Dropdown.Item>
           </DropdownButton>
         </SortBox>
 
         {/* 글목록 */}
         <ItemContainer>
           <Items>
-
             {/* 글 */}
-            <Item>
-              <RatingBox>별점나오는곳</RatingBox>
-              <TitleBox>
-                타이틀타이틀타이틀타타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀이틀타이틀타이틀타이틀타이틀타이틀
-              </TitleBox>
-              <ContentBox>
-                내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용
-                내용 내용 내용 내용 내용 내용 내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-              </ContentBox>
-              <UserNameBox>유저이름</UserNameBox>
-            </Item>
-            <Item>
-              <RatingBox>별점나오는곳</RatingBox>
-              <TitleBox>
-                타이틀타이틀타이틀타타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀이틀타이틀타이틀타이틀타이틀타이틀
-              </TitleBox>
-              <ContentBox>
-                내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용
-                내용 내용 내용 내용 내용 내용 내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-              </ContentBox>
-              <UserNameBox>유저이름</UserNameBox>
-            </Item>
-            <Item>
-              <RatingBox>별점나오는곳</RatingBox>
-              <TitleBox>
-                타이틀타이틀타이틀타타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀이틀타이틀타이틀타이틀타이틀타이틀
-              </TitleBox>
-              <ContentBox>
-                내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용
-                내용 내용 내용 내용 내용 내용 내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-              </ContentBox>
-              <UserNameBox>유저이름</UserNameBox>
-            </Item>
-            <Item>
-              <RatingBox>별점나오는곳</RatingBox>
-              <TitleBox>
-                타이틀타이틀타이틀타타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀이틀타이틀타이틀타이틀타이틀타이틀
-              </TitleBox>
-              <ContentBox>
-                내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용
-                내용 내용 내용 내용 내용 내용 내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-              </ContentBox>
-              <UserNameBox>유저이름</UserNameBox>
-            </Item>
-            <Item>
-              <RatingBox>별점나오는곳</RatingBox>
-              <TitleBox>
-                타이틀타이틀타이틀타타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀타이틀이틀타이틀타이틀타이틀타이틀타이틀
-              </TitleBox>
-              <ContentBox>
-                내용내용내용내용내용내내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용용내용내용내용내용내용
-                내용 내용 내용 내용 내용 내용 내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-              </ContentBox>
-              <UserNameBox>유저이름</UserNameBox>
-            </Item>
-
-            
+            {posts?.map((posts) => (
+              <Item key={posts.id}>
+                <RatingBox>
+                  <ReactStars count={posts.rate}></ReactStars>
+                </RatingBox>
+                <TitleBox>{posts.title}</TitleBox>
+                <ContentBox>{ReactHtmlParser(posts.content)}</ContentBox>
+                <UserNameBox>{posts.user_id}</UserNameBox>
+              </Item>
+            ))}
           </Items>
         </ItemContainer>
       </MainBox>
@@ -130,7 +92,6 @@ const Item = styled.div`
   cursor: pointer;
   transition: 0.2s;
   box-sizing: inherit;
-
 
   &:hover {
     text-decoration: none;
