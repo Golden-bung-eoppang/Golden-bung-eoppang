@@ -6,8 +6,8 @@ const Header = () => {
   const [isModal, setIsModal] = useState(true);
   return (
     <>
-      nav
-      {isModal && <HomeSignModal />}
+      {/* nav
+      {isModal && <HomeSignModal />} */}
     </>
   );
 };
