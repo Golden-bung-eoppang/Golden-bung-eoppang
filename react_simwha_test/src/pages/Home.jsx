@@ -10,6 +10,7 @@ import ReactStars from "react-rating-stars-component";
 import { ScrollToTop } from "../components/ScrollToTop";
 import Weather from "./Weather";
 import "bootstrap/dist/css/bootstrap.min.css";
+import inga from "../img/inga_bbang.jpg";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Home = () => {
   return (
     <Layout>
       <Weather />
+
       <MainBox>
         {/* 버튼 클릭 시 스크롤을 맨 위로 올려주는 컴포넌트 */}
         <ScrollToTop />
@@ -34,7 +36,6 @@ const Home = () => {
             <Dropdown.Item as="button">평점순</Dropdown.Item>
           </DropdownButton>
         </SortBox>
-
         {/* 글목록 */}
         <ItemContainer>
           <Items>
@@ -68,7 +69,12 @@ const Home = () => {
 
 export default Home;
 
-const MainBox = styled.main``;
+const MainBox = styled.main`
+  background-image: url(${inga});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+`;
 const SortBox = styled.section`
   display: flex;
   text-align: right;

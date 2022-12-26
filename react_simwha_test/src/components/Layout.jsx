@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./Header";
-
 const Layout = ({ children, bgColor = "#fff" }) => {
   return (
     <>
@@ -18,5 +17,5 @@ const StLayout = styled.div`
   background-color: ${({ bgColor }) => {
     return bgColor;
   }};
-  padding: 24px;
+  padding: 24px 0;
 `;

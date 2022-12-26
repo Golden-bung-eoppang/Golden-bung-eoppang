@@ -36,14 +36,14 @@ export default function Weather() {
 
   return (
     <HeaderContianer>
+      <Text>당신이 살고 있는 곳은?</Text>
       <CityInputBox
-        placeholder="Add City"
+        placeholder="영어로 적어주세요"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         type="text"
         onKeyDown={searchWeather}
       />
-
       {Object.keys(weatherResult).length !== 0 && (
         <>
           <TextBox>
@@ -76,6 +76,10 @@ export default function Weather() {
   );
 }
 
+const Text = styled.text`
+  font-size: 20px;
+  color: #6d6d00;
+`;
 const Texts = styled.span`
   color: white;
   position: relative;
@@ -118,7 +122,7 @@ const ResultWrap = styled.div`
   padding: 10px 20px;
 `;
 const CityInputBox = styled.input`
-  width: 150px;
+  width: 230px;
   height: 40px;
   background-color: #ffcd00;
   padding: 5px;
