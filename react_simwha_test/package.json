@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn run build && aws s3 sync build/ s3://jaehyun-firsts3"
+    "deploy": "yarn run build && aws s3 sync build/ s3://jaehyun-firsts3",
+    "server": "json-server --watch db.json --port 3001"
   },
   "eslintConfig": {
     "extends": [
