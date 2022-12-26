@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 export default function Logo() {
   return (
     <div
       style={{
-        fontSize: '50px',
-        textAlign: 'center',
-        fontWeight: '800',
-        color: '#f2d589',
+        fontSize: "50px",
+        textAlign: "center",
+        fontWeight: "800",
+        color: "white",
       }}
     >
       황금잉어빵
