@@ -14,7 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.addupdateSlice.posts);
-  console.log(posts);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,14 +31,7 @@ const Home = () => {
         <SortBox>
           <DropdownButton id="dropdown-item-button" title="---정렬---">
             <Dropdown.Item as="button">전체</Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                console.log(12312);
-              }}
-              as="button"
-            >
-              평점순
-            </Dropdown.Item>
+            <Dropdown.Item as="button">평점순</Dropdown.Item>
           </DropdownButton>
         </SortBox>
 
