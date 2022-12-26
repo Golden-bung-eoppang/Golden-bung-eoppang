@@ -7,7 +7,7 @@ export const __addWriteThunk = createAsyncThunk(
     // 콜백함수
     try {
       const { data } = await axios.post(`http://localhost:3001/posts`, payload);
-      // console.log(data);
+      console.log("오류확인: ", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -49,20 +49,14 @@ export const addupdateSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    addPost: (state) => {
-      state.posts = {
-        user_id: "miyoung",
-        id: Date.now(),
-        title: "",
-        content: "",
-        rate: "",
-      };
+    addPost: (state, action) => {
+      state.posts.push(action.payload);
     },
   },
   extraReducers: {
     [__addWriteThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts = action.payload;
+      state.posts.push(action.payload);
     },
     [__addWriteThunk.rejected]: (state, action) => {
       state.isLoading = false;

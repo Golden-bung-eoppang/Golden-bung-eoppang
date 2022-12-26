@@ -12,20 +12,17 @@ import { ScrollToTop } from "../components/ScrollToTop";
 const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.addupdateSlice.posts);
+  console.log(posts);
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostThunk());
   }, [dispatch]);
 
-  // 버튼 클릭 시 스크롤을 맨 위로 올려주는 함수
-  const goToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <Layout>
       <MainBox>
+        {/* 버튼 클릭 시 스크롤을 맨 위로 올려주는 컴포넌트 */}
         <ScrollToTop />
         {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
