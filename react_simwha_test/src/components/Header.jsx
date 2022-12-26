@@ -1,20 +1,27 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { openModal } from "../redux/modules/modalSlice";
 import { setInitialState } from "../redux/modules/userSlice";
 import HomeSignModal from "./home/HomeSignModal";
 import inga from "../img/inga_bbang.jpg";
 import Weather from "../pages/Weather";
 import Logo from "./Logo";
-import styled from "styled-components";
 
 const Header = () => {
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, modal } = useSelector((state) => state);
   const isUser = user.user;
+
+  const handleWrite = () => {
+    if (user.user) {
+      return navigate("/write");
+    }
+    return dispatch(openModal());
+  };
 
   return (
     <HeaderBox>
@@ -26,7 +33,7 @@ const Header = () => {
       <Button
         style={{ margin: "10px" }}
         onClick={() => {
-          nagivate("/");
+          navigate("/");
         }}
       >
         Home
