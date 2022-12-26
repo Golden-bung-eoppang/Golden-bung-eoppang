@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import iconimg from '../img/iconimg.png';
-import moveimg from '../img/excited.gif';
+import React, { useState } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import iconimg from "../img/iconimg.png";
+import moveimg from "../img/excited.gif";
 export default function Weather() {
-  const [location, setLocation] = useState('');
-  const [weatherResult, setWeatherResult] = useState('');
+  const [location, setLocation] = useState("");
+  const [weatherResult, setWeatherResult] = useState("");
 
-  const API_KEY = '30ccac4351c9964310cd3cce7aceb7d3';
+  const API_KEY = "30ccac4351c9964310cd3cce7aceb7d3";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
 
   const searchWeather = async (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       try {
         const data = await axios({
-          method: 'get',
+          method: "get",
           url,
         });
         setWeatherResult(data);
       } catch (err) {
-        alert('잘못된 지역이름입니다');
+        alert("잘못된 지역이름입니다");
       }
     }
   };
@@ -36,10 +36,10 @@ export default function Weather() {
   return (
     <HeaderContianer>
       <CityInputBox
-        placeholder='Add City'
+        placeholder="Add City"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
-        type='text'
+        type="text"
         onKeyDown={searchWeather}
       />
 
@@ -76,9 +76,9 @@ export default function Weather() {
 }
 
 const Texts = styled.span`
+  color: white;
   position: relative;
-  top: -5px;
-`
+`;
 const HeaderContianer = styled.div`
   display: flex;
   justify-content: center;
@@ -86,7 +86,7 @@ const HeaderContianer = styled.div`
   width: 650px;
   flex-wrap: wrap;
   margin: auto;
-`
+`;
 const TextBox = styled.div`
   height: 40px;
   border: 3px solid #ffcd00;
@@ -94,6 +94,7 @@ const TextBox = styled.div`
   /* position: absolute;
   top: 63px; */
   font-size: 20px;
+  background-color: black;
 `;
 
 const ImgBox = styled.img`
@@ -108,7 +109,7 @@ const ResultWrap = styled.div`
   align-content: center;
   align-items: center;
   justify-content: center;
-  margin-top:15px;
+  margin-top: 15px;
   border: 1px solid #ffcd00;
   border-radius: 8px;
   background-color: #ffcd00;

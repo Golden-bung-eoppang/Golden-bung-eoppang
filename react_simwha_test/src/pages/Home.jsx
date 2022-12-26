@@ -7,20 +7,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getPostThunk } from "../redux/modules/addupdateSlice";
 import ReactHtmlParser from "react-html-parser";
 import ReactStars from "react-rating-stars-component";
+import { ScrollToTop } from "../components/ScrollToTop";
 
 const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.addupdateSlice.posts);
-
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostThunk());
   }, [dispatch]);
 
+  // 버튼 클릭 시 스크롤을 맨 위로 올려주는 함수
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Layout>
       <MainBox>
+        <ScrollToTop />
         {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
           <Button
