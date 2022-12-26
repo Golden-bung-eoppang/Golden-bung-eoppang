@@ -11,13 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { render } from "react-dom";
 import ReactHtmlParser from "react-html-parser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Write = () => {
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-  // console.log(content)
+  const posts = useSelector((state) => state.detailPosts);
+  const { id } = useParams();
+  console.log(posts)
 
   // handler
   const onClickSubmitWriteHandler = (e) => {
@@ -36,7 +38,7 @@ const Write = () => {
     }
 
     const newpost = {
-      user_id: "miyoung",
+      user_id: "",
       id: Date.now(),
       title,
       content,
@@ -63,8 +65,8 @@ const Write = () => {
   };
 
   useEffect(() => {
-    dispatch(__getPostThunk());
-  }, []);
+    dispatch(__getPostThunk(id));
+  }, [dispatch, id]);
 
   return (
     <Layout>
