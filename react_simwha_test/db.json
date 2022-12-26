@@ -1,16 +1,5 @@
 {
-  "users": [
-    {
-      "id": "gg",
-      "password": 3110,
-      "username": "gg"
-    },
-    {
-      "id": "a",
-      "password": 97,
-      "username": "a"
-    }
-  ],
+  "users": [],
   "posts": [
     {
       "user_id": "gg",
