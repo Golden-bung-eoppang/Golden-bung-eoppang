@@ -87,12 +87,14 @@ const SortBox = styled.section`
 `;
 
 const ItemContainer = styled.div`
+  display: flex;
   margin: 0 auto;
   box-sizing: inherit;
 `;
 const Items = styled.ul`
+  justify-content: center;
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   grid-gap: 35px;
   gap: 35px;
