@@ -30,16 +30,16 @@ const Home = () => {
         {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
           <Button
-            style={{ marginRight: "10px", color: "white" }}
+            style={{marginRight: '10px', color: 'white'}}
             onClick={() => {
-              navigate("/write");
+              navigate('/write');
             }}
           >
             글쓰기
           </Button>
-          <DropdownButton id="dropdown-item-button" title="---정렬---">
-            <Dropdown.Item as="button">전체</Dropdown.Item>
-            <Dropdown.Item as="button">평점순</Dropdown.Item>
+          <DropdownButton id='dropdown-item-button' title='---정렬---'>
+            <Dropdown.Item as='button'>전체</Dropdown.Item>
+            <Dropdown.Item as='button'>평점순</Dropdown.Item>
           </DropdownButton>
         </SortBox>
 
@@ -55,7 +55,12 @@ const Home = () => {
                 }}
               >
                 <RatingBox>
-                  <ReactStars count={posts.rate}></ReactStars>
+                  <ReactStars
+                    count={posts.rate}
+                    size={30}
+                    color='#f2d589'
+                    activeColor='#f2d589'
+                  ></ReactStars>
                 </RatingBox>
                 <TitleBox>{posts.title}</TitleBox>
                 <ContentBox>{ReactHtmlParser(posts.content)}</ContentBox>
