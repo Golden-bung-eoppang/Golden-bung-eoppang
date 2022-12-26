@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { __getPostThunk } from "../redux/modules/addupdateSlice";
+import {__getPostThunk} from '../redux/modules/mainupdateSlice';
 import ReactHtmlParser from "react-html-parser";
 import ReactStars from "react-rating-stars-component";
 import { ScrollToTop } from "../components/ScrollToTop";
@@ -13,7 +13,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.addupdateSlice.posts);
+  const posts = useSelector((state) => state.mainupdateSlice.posts);
+  console.log(posts)
 
   const navigate = useNavigate();
 
