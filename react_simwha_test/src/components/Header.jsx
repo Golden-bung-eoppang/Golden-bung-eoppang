@@ -23,14 +23,22 @@ const Header = () => {
 
   return (
     <NavContainer>
-      <Logo to="/">zzz
+      <Logo to="/">
         <img src="/logo.png" height="58" alt="" />
         <h1>황금 잉어빵</h1>
       </Logo>
       <ButtonContainer>
-        <Button onClick={handleWrite}>새 글 쓰기</Button>
+        <LinkMap>
+          <a
+            href="https://www.google.com/maps/d/u/0/viewer?mid=1a8ow3qCMv4WtgFnRA_sGTuDm5MpsvV9P&hl=en_US&ll=36.32833077457025%2C127.70000039641127&z=7"
+            target="_blank"
+          >
+            🔎 황금잉어여지도
+          </a>
+        </LinkMap>
+        <Button onClick={handleWrite}>🗒&nbsp;새 글 쓰기</Button>
         {!isUser && (
-          <Button onClick={() => dispatch(openModal())}>로그인</Button>
+          <Button onClick={() => dispatch(openModal())}>👤&nbsp;로그인</Button>
         )}
         {isUser && (
           <Button onClick={() => dispatch(setInitialState())}>로그아웃</Button>
@@ -40,6 +48,14 @@ const Header = () => {
     </NavContainer>
   );
 };
+const LinkMap = styled.text`
+  border: none;
+  padding: 1px 6px;
+  font-size: 18px;
+  background-color: transparent;
+  font-weight: 700;
+  cursor: pointer;
+`;
 
 const NavContainer = styled.div`
   width: 100%;
