@@ -11,10 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { render } from "react-dom";
 import ReactHtmlParser from "react-html-parser";
+import { useNavigate } from "react-router-dom";
 
 const Write = () => {
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
   // console.log(content)
 
   // handler
@@ -30,6 +32,7 @@ const Write = () => {
     };
 
     dispatch(__addWriteThunk(newpost));
+    navigate("/write/:id");
   };
 
   // 제목

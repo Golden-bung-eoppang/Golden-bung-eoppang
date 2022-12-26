@@ -25,7 +25,6 @@ const Home = () => {
         <SortBox>
           <Button
             style={{ marginRight: "10px", color: "white" }}
-            variant="warning"
             onClick={() => {
               nagivate("/write");
             }}
