@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <NavContainer>
-      <Logo to="/">
+      <Logo to="/">zzz
         <img src="/logo.png" height="58" alt="" />
         <h1>황금 잉어빵</h1>
       </Logo>
