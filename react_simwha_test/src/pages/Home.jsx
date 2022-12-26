@@ -12,7 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.addupdateSlice.posts);
 
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostThunk());
@@ -26,7 +26,7 @@ const Home = () => {
           <Button
             style={{ marginRight: "10px", color: "white" }}
             onClick={() => {
-              nagivate("/write");
+              navigate("/write");
             }}
           >
             글쓰기
@@ -42,7 +42,12 @@ const Home = () => {
           <Items>
             {/* 글 */}
             {posts?.map((posts) => (
-              <Item key={posts.id}>
+              <Item
+                key={posts.id}
+                onClick={() => {
+                  navigate(`/works/${posts.id}`);
+                }}
+              >
                 <RatingBox>
                   <ReactStars count={posts.rate}></ReactStars>
                 </RatingBox>
