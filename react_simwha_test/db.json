@@ -1,30 +1,19 @@
 {
   "users": [
     {
-      "user_id": 1519211809934,
-      "id": "user1",
-      "password": "password1",
-      "username": "username1"
-    },
-    {
       "id": "gg",
-      "password": "gg",
+      "password": 3110,
       "username": "gg"
     },
     {
-      "id": "gggg",
-      "password": "gg",
-      "username": "gg"
-    },
-    {
-      "id": "jjj",
-      "password": "kkk",
-      "username": "kkk"
+      "id": "a",
+      "password": 97,
+      "username": "a"
     }
   ],
   "posts": [
     {
-      "user_id": 1519211809934,
+      "user_id": "gg",
       "post_id": 1519211810362,
       "title": "title",
       "content": "content"
@@ -34,7 +23,7 @@
     {
       "comment_id": 1519129853500,
       "post_id": 1519211810362,
-      "user_id": 1519211809934,
+      "user_id": "gg",
       "content": "댓글내용"
     }
   ]

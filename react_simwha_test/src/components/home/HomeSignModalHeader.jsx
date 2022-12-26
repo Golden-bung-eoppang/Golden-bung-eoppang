@@ -6,7 +6,9 @@ const HomeSignModalHeader = () => {
   const dispatch = useDispatch();
   return (
     <Container>
-      <CancelButton onClick={() => dispatch(closeModal())}>X</CancelButton>
+      <CancelButton onClick={() => dispatch(closeModal())}>
+        <img src="/cancel.png" width="16" height="16" alt="" />
+      </CancelButton>
     </Container>
   );
 };

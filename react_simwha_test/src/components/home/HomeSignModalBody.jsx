@@ -1,29 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { signInUserThunk, signUpUserThunk } from "../../redux/modules/userSlice";
+import { closeModal } from "../../redux/modules/modalSlice";
+import { setInitialState, signInUserThunk, signUpUserThunk } from "../../redux/modules/userSlice";
 import HomeSignInput from "./HomeSignInput";
 
 const HomeSignModalBody = () => {
   const dispatch = useDispatch();
   const [status, setStatus] = useState("로그인");
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const user = useSelector((state) => state.user);
+  const idRef = useRef(null);
+  const passwordRef = useRef(null);
+  const usernameRef = useRef(null);
+  const { user, error } = useSelector((state) => state.user);
 
-  if (user.error) {
-    alert(user.error);
-  }
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(setInitialState());
+    }
+  }, [error]);
+
+  useEffect(() => {
+    console.log("user", user);
+    if (user) {
+      dispatch(closeModal());
+    }
+  }, [user]);
 
   const handleClick = () => {
+    const id = idRef.current?.value;
+    const password = passwordRef.current?.value;
+    const username = usernameRef.current?.value;
+
     if (!id || !password) {
       return alert("모든 값을 입력해주세요");
     }
     if (status === "회원가입" && !username) {
       return alert("이름을 입력해주세요");
     }
-
     if (status === "로그인") {
       dispatch(signInUserThunk({ id, password }));
     } else {
@@ -37,16 +51,16 @@ const HomeSignModalBody = () => {
         <h2>{status}</h2>
         <Wrapper>
           <Title>아이디</Title>
-          <HomeSignInput value={id} setValue={setId} placeholder="아이디를 입력하세요." />
+          <HomeSignInput ref={idRef} placeholder="아이디를 입력하세요." />
         </Wrapper>
         <Wrapper>
           <Title>비밀번호</Title>
-          <HomeSignInput value={password} type="password" setValue={setPassword} placeholder="비밀번호를 입력하세요." />
+          <HomeSignInput ref={passwordRef} type="password" placeholder="비밀번호를 입력하세요." />
         </Wrapper>
         {status === "회원가입" && (
           <Wrapper>
             <Title>이름</Title>
-            <HomeSignInput value={username} setValue={setUsername} placeholder="이름을 입력하세요." />
+            <HomeSignInput ref={usernameRef} placeholder="이름을 입력하세요." />
           </Wrapper>
         )}
         <ButtonWrapper>

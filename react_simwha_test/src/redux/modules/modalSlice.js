@@ -6,10 +6,10 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    openModal: (state) => {
+    openModal: () => {
       return true;
     },
-    closeModal: (state) => {
+    closeModal: () => {
       return false;
     },
   },
