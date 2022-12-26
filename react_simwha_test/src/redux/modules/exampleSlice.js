@@ -17,7 +17,7 @@ export const __updateTodoThunk = createAsyncThunk(
   "UPDATE_TODO",
   async (arg, thunkAPI) => {
     try {
-      axios.patch(`http://localhost:3001/todos/${arg.id}`, arg);
+      axios.patch(`http://localhost:3001/todos/${arg}`, arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);

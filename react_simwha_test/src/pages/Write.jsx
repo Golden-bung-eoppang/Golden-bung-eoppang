@@ -20,6 +20,18 @@ const Write = () => {
   const onClickSubmitWriteHandler = (e) => {
     e.preventDefault();
 
+    // 유효성 검사
+    if (content === '' && title === '') {
+      alert('제목과 내용을 입력해주세요.')
+      return;
+    } else if (content === '') {
+      alert('내용을 입력해주세요.')
+      return;
+    } else if (title === '') {
+      alert('제목을 입력해주세요.')
+      return;
+    }
+
     const newpost = {
       user_id: 'miyoung',
       id: Date.now(),
@@ -29,7 +41,11 @@ const Write = () => {
     };
 
     dispatch(__addWriteThunk(newpost));
-    navigate('/write/:id');
+
+    // 등록버튼 누르면 만들어진 id의 상세페이지로 이동
+    navigate(`/${newpost.id}`);
+    // 브라우저 라우터 뒤에 : 가 들어가있으면 : 뒤에 붙는건 변수명 이라는 뜻
+
   };
 
   // 제목
@@ -75,6 +91,7 @@ const Write = () => {
             value={title}
             onChange={onChangeTitleHandler}
           />
+          {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
           <Editor setContent={setContent} />
           <Flex justifyCt='right' marginTop='60px'>
             <AddButton>등록</AddButton>
