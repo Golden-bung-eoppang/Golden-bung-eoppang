@@ -1,34 +1,9 @@
 {
   "users": [
     {
-      "id": "gg",
-      "password": 3110,
-      "username": "gg"
-    },
-    {
-      "id": "gggg",
-      "password": "gg",
-      "username": "gg"
-    },
-    {
-      "id": "jjj",
-      "password": "kkk",
-      "username": "kkk"
-    },
-    {
-      "id": "korea@naver.com",
-      "password": "111111",
-      "username": "고구마"
-    },
-    {
-      "id": "koko@naver.com",
-      "password": "111111",
-      "username": "111111"
-    },
-    {
-      "id": "test1313",
+      "id": "test123",
       "password": 46792755,
-      "username": "나나오"
+      "username": "qqq"
     }
   ],
   "posts": [
@@ -290,6 +265,20 @@
       "title": "3333333",
       "content": "<p>23412341</p>",
       "rate": 3
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1672038906447,
+      "title": "aawerva",
+      "content": "<p>awevrawervawve</p>",
+      "rate": 4
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1672040068642,
+      "title": "1341",
+      "content": "<p>12121525125</p>",
+      "rate": 4
     }
   ],
   "comments": [

@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import iconimg from "../img/iconimg.png";
 import moveimg from "../img/excited.gif";
+
 export default function Weather() {
   const [location, setLocation] = useState("");
   const [weatherResult, setWeatherResult] = useState("");

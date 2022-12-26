@@ -8,6 +8,8 @@ import { __getPostThunk } from "../redux/modules/addupdateSlice";
 import ReactHtmlParser from "react-html-parser";
 import ReactStars from "react-rating-stars-component";
 import { ScrollToTop } from "../components/ScrollToTop";
+import Weather from "./Weather";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,22 +23,22 @@ const Home = () => {
 
   return (
     <Layout>
+      <Weather />
       <MainBox>
         {/* 버튼 클릭 시 스크롤을 맨 위로 올려주는 컴포넌트 */}
         <ScrollToTop />
         {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
-          <Button
-            style={{ marginRight: "10px", color: "white" }}
-            onClick={() => {
-              navigate("/write");
-            }}
-          >
-            글쓰기
-          </Button>
           <DropdownButton id="dropdown-item-button" title="---정렬---">
             <Dropdown.Item as="button">전체</Dropdown.Item>
-            <Dropdown.Item as="button">평점순</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                console.log(12312);
+              }}
+              as="button"
+            >
+              평점순
+            </Dropdown.Item>
           </DropdownButton>
         </SortBox>
 
