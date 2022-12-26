@@ -90,6 +90,7 @@ const Container = styled.div`
   padding: 10px 80px;
   display: flex;
   flex-direction: column;
+  background-color: white;
 `;
 const Body = styled.div`
   flex: 1;
