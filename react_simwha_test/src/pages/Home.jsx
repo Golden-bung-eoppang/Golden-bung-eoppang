@@ -10,6 +10,7 @@ import ReactStars from "react-rating-stars-component";
 import { ScrollToTop } from "../components/ScrollToTop";
 import Weather from "./Weather";
 import "bootstrap/dist/css/bootstrap.min.css";
+import inga from "../img/inga_bbang.jpg";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,12 @@ const Home = () => {
 
 export default Home;
 
-const MainBox = styled.main``;
+const MainBox = styled.main`
+  background-image: url(${inga});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+`;
 const SortBox = styled.section`
   display: flex;
   text-align: right;
