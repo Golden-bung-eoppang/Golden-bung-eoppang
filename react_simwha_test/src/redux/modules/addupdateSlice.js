@@ -42,13 +42,7 @@ export const __getPostThunk = createAsyncThunk(
 // );
 
 const initialState = {
-  posts: {
-    user_id: 'miyoung',
-    id: Date.now(),
-    title: '',
-    content: '',
-    rate: '',
-  },
+  posts: [],
   error: null, // 서버랑 통신 실패 시 나타내는 에러메세지 담아놓는 값
   isLoading: false, // 서버에서 posts를 가져오는 상태값
 };
