@@ -8,6 +8,7 @@ const Header = () => {
     <>
       {/* nav
       {isModal && <HomeSignModal />} */}
+      여기는 네비입니다.
     </>
   );
 };
