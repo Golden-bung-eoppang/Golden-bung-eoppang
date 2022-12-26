@@ -45,7 +45,7 @@ const Home = () => {
               <Item
                 key={posts.id}
                 onClick={() => {
-                  navigate(`/works/${posts.id}`);
+                  navigate(`/${posts.id}`);
                 }}
               >
                 <RatingBox>
