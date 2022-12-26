@@ -27,17 +27,17 @@ export const __getPostThunk = createAsyncThunk(
   }
 );
 
-// export const __updatePostThunk = createAsyncThunk(
-//   'UPDATE_POST',
-//   async (id, thunkAPI) => {
-//     try {
-//       axios.patch(`http://localhost:3001/todos/${id}`, id);
-//       return thunkAPI.fulfillWithValue(id);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.code);
-//     }
-//   }
-// );
+export const __updatePostThunk = createAsyncThunk(
+  "UPDATE_POST",
+  async (id, thunkAPI) => {
+    try {
+      axios.patch(`http://localhost:3001/todos/${id}`, id);
+      return thunkAPI.fulfillWithValue(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
 
 const initialState = {
   posts: [],
@@ -77,17 +77,17 @@ export const addupdateSlice = createSlice({
     [__getPostThunk.pending]: (state) => {
       state.isLoading = true;
     },
-    // [__updatePostThunk.fulfilled]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.todo = action.payload;
-    // },
-    // [__updatePostThunk.pending]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [__updatePostThunk.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
+    [__updatePostThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.todo = action.payload;
+    },
+    [__updatePostThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updatePostThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
