@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import hashPassword from "../../lib/hashPassword";
 
 export const signUpUserThunk = createAsyncThunk("user/signUpUser", async ({ id, password, username }, thunkAPI) => {
   try {
@@ -7,9 +8,9 @@ export const signUpUserThunk = createAsyncThunk("user/signUpUser", async ({ id, 
     if (data.length !== 0) {
       return thunkAPI.rejectWithValue("이미 사용중인 아이디입니다.");
     }
-    const res = await axios.post(`http://localhost:3001/users`, { id, password, username });
-    console.log(res);
-    return thunkAPI.fulfillWithValue(res);
+    const res = await axios.post(`http://localhost:3001/users`, { id, password: hashPassword(password), username });
+    console.log(res.data);
+    return thunkAPI.fulfillWithValue(res.data);
   } catch (err) {
     return thunkAPI.rejectWithValue(err.code);
   }
@@ -17,8 +18,14 @@ export const signUpUserThunk = createAsyncThunk("user/signUpUser", async ({ id, 
 
 export const signInUserThunk = createAsyncThunk("user/signInUser", async ({ id, password }, thunkAPI) => {
   try {
-    const { data } = await axios.get(`http://localhost:3001/users?id=${id}&password=${password}`);
-    return thunkAPI.fulfillWithValue(data);
+    const { data } = await axios.get(`http://localhost:3001/users?id=${id}`);
+    if (data.length < 1) {
+      return thunkAPI.rejectWithValue("계정이 없습니다.");
+    }
+    if (data[0].password !== hashPassword(password)) {
+      return thunkAPI.rejectWithValue("비밀번호가 다릅니다.");
+    }
+    return thunkAPI.fulfillWithValue(data[0]);
   } catch (err) {
     return thunkAPI.rejectWithValue(err.code);
   }
@@ -34,8 +41,8 @@ export const userSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    signOutUser: (state) => {
-      state.user = null;
+    setInitialState: (state) => {
+      return initialState;
     },
   },
   extraReducers: {
@@ -63,5 +70,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { signOutUser } = userSlice.actions;
+export const { setInitialState } = userSlice.actions;
 export default userSlice.reducer;
