@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPostThunk } from "../redux/modules/addupdateSlice";
 import ReactHtmlParser from "react-html-parser";
@@ -11,21 +11,27 @@ import ReactStars from "react-rating-stars-component";
 const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.addupdateSlice.posts);
-  console.log(posts);
+
+  const nagivate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostThunk());
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log("posts: ", posts);
-  }, [posts]);
 
   return (
     <Layout>
       <MainBox>
         {/* 드랍다운만 부트스트랩 사용했습니다. */}
         <SortBox>
+          <Button
+            style={{ marginRight: "10px", color: "white" }}
+            variant="warning"
+            onClick={() => {
+              nagivate("/write");
+            }}
+          >
+            글쓰기
+          </Button>
           <DropdownButton id="dropdown-item-button" title="---정렬---">
             <Dropdown.Item as="button">전체</Dropdown.Item>
             <Dropdown.Item as="button">평점순</Dropdown.Item>
@@ -57,12 +63,15 @@ export default Home;
 
 const MainBox = styled.main``;
 const SortBox = styled.section`
+  display: flex;
   text-align: right;
+  justify-content: flex-end;
   border-top: 3px solid #f2d589;
   padding-top: 10px;
   box-sizing: inherit;
   margin-bottom: 15px;
 `;
+
 const ItemContainer = styled.div`
   margin: 0 auto;
   box-sizing: inherit;
