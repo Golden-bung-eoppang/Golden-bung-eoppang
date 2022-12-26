@@ -4,6 +4,11 @@
       "id": "test123",
       "password": 46792755,
       "username": "qqq"
+    },
+    {
+      "id": "test12345",
+      "password": -1224620319,
+      "username": "김미영test"
     }
   ],
   "posts": [
@@ -279,6 +284,13 @@
       "title": "1341",
       "content": "<p>12121525125</p>",
       "rate": 4
+    },
+    {
+      "user_id": "miyoung",
+      "id": 1672041823617,
+      "title": "미영test",
+      "content": "<p>미영test12345</p>",
+      "rate": 3
     }
   ],
   "comments": [
