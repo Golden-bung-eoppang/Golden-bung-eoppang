@@ -5,6 +5,31 @@
       "id": "user1",
       "password": "password1",
       "username": "username1"
+    },
+    {
+      "id": "gg",
+      "password": "gg",
+      "username": "gg"
+    },
+    {
+      "id": "gggg",
+      "password": "gg",
+      "username": "gg"
+    },
+    {
+      "id": "jjj",
+      "password": "kkk",
+      "username": "kkk"
+    },
+    {
+      "id": "korea@naver.com",
+      "password": "111111",
+      "username": "고구마"
+    },
+    {
+      "id": "koko@naver.com",
+      "password": "111111",
+      "username": "111111"
     }
   ],
   "posts": [
