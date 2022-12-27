@@ -3,10 +3,14 @@ import ReactStars from "react-rating-stars-component";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import Editor from "../components/Editor";
+<<<<<<< HEAD
 import {
   __addWriteThunk,
   __getPostThunk,
 } from "../redux/modules/addupdateSlice";
+=======
+import { __addWriteThunk } from "../redux/modules/postViewSlice";
+>>>>>>> 9d659a177aa670485c68fe8e3c6411a01370fc20
 import { signUpUserThunk } from "../redux/modules/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -45,6 +49,7 @@ const Write = () => {
       title,
       content,
       rate,
+      read: 0,
     };
 
     dispatch(__addWriteThunk(newpost));

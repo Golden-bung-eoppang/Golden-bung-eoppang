@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { __getPostViewThunk } from "../redux/modules/postViewSlice";
+import {
+  __deletePost,
+  __getPostViewThunk,
+  __viewCount,
+} from "../redux/modules/postViewSlice";
 import backImg from "../img/back.png";
 import goldenKing from "../img/goldenKing.png";
 import Layout from "../components/Layout";
@@ -16,6 +20,7 @@ export default function Post() {
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
+<<<<<<< HEAD
 
   // useEffect(() => {
   //   console.log(location.pathname);
@@ -23,9 +28,30 @@ export default function Post() {
 
   useEffect(() => {
     // console.log(123, "123");
+=======
+  console.log("detailpost", detailPost);
+  const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+>>>>>>> 9d659a177aa670485c68fe8e3c6411a01370fc20
     dispatch(__getPostViewThunk(location.pathname));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(__viewCount(location.pathname));
+  }, [dispatch]);
+
+  const onClickDeletePostHandler = () => {
+    const result = window.confirm("삭제하시겠습니까?");
+    if (result) {
+      dispatch(__deletePost(detailPost.id));
+    } else {
+      return;
+    }
+
+    navigate("/");
+  };
+  const star = detailPost.rate;
   return (
     <Layout>
       <ImgButton
@@ -47,50 +73,42 @@ export default function Post() {
                 <UserName>{detailPost.user_id}&nbsp;&nbsp;</UserName>
                 &nbsp;&nbsp;
               </div>
-              <ReactStars
-                count={detailPost.rate}
+              {/* <ReactStars
+                value={detailPost.rate}
                 size={30}
-                color="#F2D589"
                 activeColor="#F2D589"
-              ></ReactStars>
+                edit={false}
+              /> */}
+              <Stars>
+                {star === 1
+                  ? "★"
+                  : star === 2
+                  ? "★★"
+                  : star === 3
+                  ? "★★★"
+                  : star === 4
+                  ? "★★★★"
+                  : star === 5
+                  ? "★★★★★"
+                  : ""}
+              </Stars>
             </UserInfo>
             <Intro>
               나의 리뷰소개
-              <Button>
-                <button
-                  style={{
-                    display: "block",
-                    backgroundColor: "#ffcd00",
-                    color: "#3E2723",
-                    borderRadius: "8px",
-                    width: "52px",
-                    fontWeight: "bold",
-                    borderColor: "#FFB300",
-                    boxShadow: "0px 1px 1px 0px black",
-                    fontSize: "15px",
-                  }}
-                  onClick={() => {
-                    navigate(`/write/${detailPost.id}`);
-                  }}
-                >
-                  수정
-                </button>
-                <button
-                  style={{
-                    display: "block",
-                    backgroundColor: "#ffcd00",
-                    color: "#3E2723",
-                    borderRadius: "8px",
-                    width: "52px",
-                    fontWeight: "bold",
-                    borderColor: "#FFB300",
-                    boxShadow: "0px 1px 1px 0px black",
-                    fontSize: "15px",
-                  }}
-                >
-                  삭제
-                </button>
-              </Button>
+              {user && detailPost.user_id === user.id && (
+                <Button>
+                  <EditButton
+                    onClick={() => {
+                      navigate(`/write${location.pathname}`);
+                    }}
+                  >
+                    수정
+                  </EditButton>
+                  <DeleteButton onClick={onClickDeletePostHandler}>
+                    삭제
+                  </DeleteButton>
+                </Button>
+              )}
             </Intro>
 
             <Contents>{ReactHtmlParser(detailPost.content)}</Contents>
@@ -104,6 +122,33 @@ export default function Post() {
     </Layout>
   );
 }
+const Stars = styled.span`
+  font-size: 35px;
+  color: #f2d589;
+`;
+const EditButton = styled.button`
+  display: block;
+  background-color: #ffcd00;
+  color: #3e2723;
+  border-radius: 8px;
+  width: 52px;
+  font-weight: bold;
+  border-color: #ffb300;
+  box-shadow: 0px 1px 1px 0px black;
+  font-size: 15px;
+`;
+
+const DeleteButton = styled.button`
+  display: block;
+  background-color: #ffcd00;
+  color: #3e2723;
+  border-radius: 8px;
+  width: 52px;
+  font-weight: bold;
+  border-color: #ffb300;
+  box-shadow: 0px 1px 1px 0px black;
+  font-size: 15px;
+`;
 
 const ImgButton = styled.div``;
 const ImgBox = styled.img`
@@ -175,7 +220,11 @@ const Contents = styled.div`
   flex-wrap: wrap;
 `;
 
+<<<<<<< HEAD
 const CommentWrap = styled.div`
+=======
+const CommentWrap = styled.form`
+>>>>>>> 9d659a177aa670485c68fe8e3c6411a01370fc20
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

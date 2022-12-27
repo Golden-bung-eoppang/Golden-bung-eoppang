@@ -41,7 +41,9 @@ const Header = () => {
           <Button onClick={() => dispatch(openModal())}>👤&nbsp;로그인</Button>
         )}
         {isUser && (
-          <Button onClick={() => dispatch(setInitialState())}>로그아웃</Button>
+          <Button onClick={() => dispatch(setInitialState())}>
+            🎅&nbsp;로그아웃
+          </Button>
         )}
         {modal && <HomeSignModal />}
       </ButtonContainer>

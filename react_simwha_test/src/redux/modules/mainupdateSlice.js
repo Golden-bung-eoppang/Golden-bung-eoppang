@@ -1,15 +1,14 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
-import {v4 as uuidv4} from 'uuid';
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 export const __addWriteThunk = createAsyncThunk(
-  'ADD_WRITE', // action value
+  "ADD_WRITE", // action value
   async (payload, thunkAPI) => {
     // 콜백함수
-    console.log('payload', payload);
+    console.log("payload", payload);
     try {
-      const {data} = await axios.post(`http://localhost:3001/posts`, payload);
+      const { data } = await axios.post(`http://localhost:3001/posts`, payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -18,11 +17,10 @@ export const __addWriteThunk = createAsyncThunk(
 );
 
 export const __getPostThunk = createAsyncThunk(
-  'GETMAIN_POSTS',
+  "GETMAIN_POSTS",
   async (payload, thunkAPI) => {
     try {
-      const {data} = await axios.get(`http://localhost:3001/posts`);
-      console.log('data', data);
+      const { data } = await axios.get(`http://localhost:3001/posts`);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -49,7 +47,7 @@ const initialState = {
 };
 
 export const mainupdateSlice = createSlice({
-  name: 'updateposts',
+  name: "updateposts",
   initialState,
   reducers: {
     // addPost: (state, action) => {
@@ -57,11 +55,12 @@ export const mainupdateSlice = createSlice({
     // },
     clearPosts: (state) => {
       return (state.posts = {
-        user_id: '',
+        user_id: "",
         id: uuidv4(),
-        rate: '',
-        title: '',
-        content: '',
+        rate: "",
+        title: "",
+        content: "",
+        read: 0,
       });
     },
   },
@@ -80,7 +79,6 @@ export const mainupdateSlice = createSlice({
     [__getPostThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts = action.payload;
-      console.log('reducer', action.payload);
     },
     [__getPostThunk.rejected]: (state, action) => {
       state.isLoading = false;
@@ -103,5 +101,5 @@ export const mainupdateSlice = createSlice({
   },
 });
 
-export const {clearPosts} = mainupdateSlice.actions;
+export const { clearPosts } = mainupdateSlice.actions;
 export default mainupdateSlice.reducer;
