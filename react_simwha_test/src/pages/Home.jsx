@@ -71,26 +71,29 @@ const Home = () => {
         <ItemContainer>
           <Items>
             {/* 글 */}
-            {posts?.map((posts) => (
-              <Item
-                key={posts.id}
-                onClick={() => {
-                  navigate(`/${posts.id}`);
-                }}
-              >
-                <RatingBox>
-                  <ReactStars
-                    count={posts.rate}
-                    size={30}
-                    color="#f2d589"
-                    activeColor="#f2d589"
-                  ></ReactStars>
-                </RatingBox>
-                <TitleBox>{posts.title}</TitleBox>
-                <ContentBox>{ReactHtmlParser(posts.content)}</ContentBox>
-                <UserNameBox>{posts.user_id}</UserNameBox>
-              </Item>
-            ))}
+            {posts
+              ?.slice(0)
+              .reverse()
+              .map((posts) => (
+                <Item
+                  key={posts.id}
+                  onClick={() => {
+                    navigate(`/${posts.id}`);
+                  }}
+                >
+                  <RatingBox>
+                    <ReactStars
+                      count={posts.rate}
+                      size={30}
+                      color="#f2d589"
+                      activeColor="#f2d589"
+                    ></ReactStars>
+                  </RatingBox>
+                  <TitleBox>{posts.title}</TitleBox>
+                  <ContentBox>{ReactHtmlParser(posts.content)}</ContentBox>
+                  <UserNameBox>{posts.user_id}</UserNameBox>
+                </Item>
+              ))}
           </Items>
         </ItemContainer>
       </MainBox>
