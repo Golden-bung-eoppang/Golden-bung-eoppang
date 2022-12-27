@@ -1,4 +1,4 @@
-/* import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
@@ -19,7 +19,6 @@ export const __getPostThunk = createAsyncThunk(
   "ADDGET_POSTS",
   async (postId, thunkAPI) => {
     try {
-      console.log("id", postId);
       const { data } = await axios.get(`http://localhost:3001/posts/${postId}`);
       console.log("data", data);
       return thunkAPI.fulfillWithValue(data);
@@ -62,7 +61,6 @@ export const addupdateSlice = createSlice({
         rate: "",
         title: "",
         content: "",
-        read: 0,
       };
     },
   },
@@ -105,4 +103,3 @@ export const addupdateSlice = createSlice({
 
 export const { addPost } = addupdateSlice.actions;
 export default addupdateSlice.reducer;
- */

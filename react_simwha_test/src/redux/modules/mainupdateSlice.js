@@ -21,6 +21,7 @@ export const __getPostThunk = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(`http://localhost:3001/posts`);
+
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,7 +61,6 @@ export const mainupdateSlice = createSlice({
         rate: "",
         title: "",
         content: "",
-        read: 0,
       });
     },
   },
@@ -79,6 +79,7 @@ export const mainupdateSlice = createSlice({
     [__getPostThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts = action.payload;
+      console.log("reducer", action.payload);
     },
     [__getPostThunk.rejected]: (state, action) => {
       state.isLoading = false;
