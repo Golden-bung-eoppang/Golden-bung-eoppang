@@ -29,9 +29,9 @@ function CommentInput() {
     setComments("");
   };
   return (
-    <form>
+    <form onSubmit={AddCommentsHandler}>
       <input type="text" value={comments} onChange={commentsChangeHandler} />
-      <button onClick={AddCommentsHandler}>추가하기</button>
+      <button>추가하기</button>
     </form>
   );
 }
