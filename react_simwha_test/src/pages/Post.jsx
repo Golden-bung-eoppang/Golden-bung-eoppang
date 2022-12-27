@@ -90,8 +90,10 @@ export default function Post() {
           </>
         )}
       </PageContainer>
-      <CommentInput />
-      <CommentList />
+      <CommentWrap>
+        <CommentInput />
+        <CommentList />
+      </CommentWrap>
     </Layout>
   );
 }
@@ -165,3 +167,11 @@ const Contents = styled.div`
   font-size: 17px;
   flex-wrap: wrap;
 `;
+
+
+const CommentWrap = styled.form`
+  
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+`
