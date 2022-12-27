@@ -69,7 +69,7 @@ export default function Post() {
                     fontWeight: "bold",
                     borderColor: "#FFB300",
                     boxShadow: "0px 1px 1px 0px black",
-                  }}
+                  }} onClick={()=>{navigate(`/write/${detailPost.id}`);}}
                 >
                   수정
                 </button>
