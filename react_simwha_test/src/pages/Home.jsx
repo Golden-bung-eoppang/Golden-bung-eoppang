@@ -24,10 +24,15 @@ const Home = () => {
   const { posts, isLoading } = useSelector((state) => state.mainupdateSlice);
 
   const getValue = (e) => {
+    e.preventDefault();
     setUserInput(e.target.value.toLowerCase("posts"));
   };
-  const searched = posts.filter((item) =>
-    item.content.toLowerCase().includes(userInput)
+
+  const searched = posts.filter(
+    (item) =>
+      item.content.toLowerCase().includes(userInput) ||
+      item.title.toLowerCase().includes(userInput) ||
+      item.user_id.toLowerCase().includes(userInput)
   );
 
   const navigate = useNavigate();
@@ -70,8 +75,7 @@ const Home = () => {
         {/* 글목록 */}
         <ItemContainer>
           <Items>
-            {/* 글 */}
-            {posts
+            {searched
               ?.slice(0)
               .reverse()
               .map((posts) => (
@@ -93,6 +97,7 @@ const Home = () => {
                   <ContentBox>{ReactHtmlParser(posts.content)}</ContentBox>
                   <UserNameBox>{posts.user_id}</UserNameBox>
                 </Item>
+                // 잔여연산자 사용
               ))}
           </Items>
         </ItemContainer>
@@ -108,6 +113,7 @@ const MainBox = styled.main`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  height: 100vh;
 `;
 const SortBox = styled.section`
   display: flex;
