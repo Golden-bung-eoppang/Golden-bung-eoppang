@@ -8,6 +8,8 @@ import {
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
@@ -15,7 +17,8 @@ const Comment = ({ comment }) => {
   const editHandler = () => {
     setIsEdit((prev) => !prev);
   };
-  const deleteHandler = () => {
+  const deleteHandler = (event) => {
+    event.preventDefault();
     const result = window.confirm("삭제하시겠습니까?");
     if (result) {
       dispatch(__deleteComment(comment.id));
@@ -45,25 +48,76 @@ const Comment = ({ comment }) => {
     setEditComment(event.target.value);
   };
   return (
-    <div>
+    <CommListWrap>
       {isEdit ? (
-        <input
+        <ListInput
           type="text"
           value={editComment}
           onChange={changeEditCommentHandler}
         />
       ) : (
-        <div>{comment.content}</div>
+        <CommentContent>
+          <div>{comment.content}</div>
+          <ButtonWrap>
+            <DeleteButtonWrap disabled={isEdit} onClick={deleteHandler}>
+              삭제
+            </DeleteButtonWrap>
+            {isEdit ? (
+              <ListButton onClick={editDoneHandler}>완료</ListButton>
+            ) : (
+              <ListButton onClick={editHandler}>수정</ListButton>
+            )}
+          </ButtonWrap>
+        </CommentContent>
       )}
-      <button disabled={isEdit} onClick={deleteHandler}>
-        삭제
-      </button>
-      {isEdit ? (
-        <button onClick={editDoneHandler}>완료</button>
-      ) : (
-        <button onClick={editHandler}>수정</button>
-      )}
-    </div>
+    </CommListWrap>
   );
 };
 export default Comment;
+
+const CommListWrap = styled.div`
+  margin: auto;
+`;
+
+const CommentContent = styled.div`
+  width: 730px;
+  border-bottom: 2px solid #ffcd00;
+
+  padding-top: 10px;
+  font-size: 17px;
+`;
+
+const ListInput = styled.input``;
+
+const ButtonWrap = styled.div`
+  background-color: white;
+  width: 250px;
+  display: flex;
+  margin-left: 500px;
+  margin-bottom: 10px;
+`;
+
+const DeleteButtonWrap = styled.button`
+  margin-right: 10px;
+  margin-left: 130px;
+  display: block;
+  background-color: #ffcd00;
+  color: #3e2723;
+  border-radius: 6px;
+  width: 45px;
+  font-weight: bold;
+  border-color: #ffb300;
+  box-shadow: 0px 1px 1px 0px black;
+  font-size: 12px;
+`;
+const ListButton = styled.button`
+  display: block;
+  background-color: #ffcd00;
+  color: #3e2723;
+  border-radius: 6px;
+  width: 45px;
+  font-weight: bold;
+  border-color: #ffb300;
+  box-shadow: 0px 1px 1px 0px black;
+  font-size: 12px;
+`;
