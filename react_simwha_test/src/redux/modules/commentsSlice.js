@@ -6,8 +6,9 @@ export const __getCommnetsByTodoId = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/comments?todoId=${arg}`
+        `http://localhost:3001/comments?comment_id=${arg}`
       );
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -98,7 +99,6 @@ export const commentsSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.comments.isLoading = false;
-      console.log(action);
       const target = state.comments.data.findIndex(
         (comment) => comment.id === action.payload
       );
