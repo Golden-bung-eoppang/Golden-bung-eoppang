@@ -52,6 +52,21 @@ export const __updatePostThunk = createAsyncThunk(
   }
 );
 
+export const __viewCount = createAsyncThunk(
+  "POSTVIEW_COUNT",
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/posts${id}`);
+      const payload = { ...data, read: data.read + 1 };
+
+      await axios.patch(`http://localhost:3001/posts/${id}`, payload);
+      return thunkAPI.fulfillWithValue(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
+
 const initialState = {
   posts: [],
   error: null,

@@ -648,7 +648,7 @@
       "title": "asdfasdfd",
       "content": "<p>asdfasfd</p>",
       "rate": 0,
-      "read": 0
+      "read": 1
     },
     {
       "user_id": "test12345",
@@ -656,22 +656,24 @@
       "title": "asf",
       "content": "<p>asdf</p>",
       "rate": 1,
-      "read": 0
+      "read": 4
     },
     {
+      "1": "",
       "user_id": "test12345",
       "id": "ef77f0b1-2431-4843-95af-c9aa3b73fe5d",
       "title": "asdfasdf",
       "content": "<p>asdfsf3333</p>",
       "rate": 3,
-      "read": 0
+      "read": 5
     },
     {
       "user_id": "test11111",
       "id": "ac94f346-23e7-475b-887a-31a160a15919",
       "title": "ㅎㅁㅎㅁ",
       "content": "<p>ㅎㅁㅎㅁ</p>",
-      "rate": 4
+      "rate": 4,
+      "read": null
     }
   ],
   "comments": [

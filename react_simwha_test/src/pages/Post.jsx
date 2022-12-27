@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   __deletePost,
   __getPostViewThunk,
+  __viewCount,
 } from "../redux/modules/postViewSlice";
 import backImg from "../img/back.png";
 import goldenKing from "../img/goldenKing.png";
@@ -24,6 +25,10 @@ export default function Post() {
 
   useEffect(() => {
     dispatch(__getPostViewThunk(location.pathname));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(__viewCount(location.pathname));
   }, [dispatch]);
 
   const onClickDeletePostHandler = () => {

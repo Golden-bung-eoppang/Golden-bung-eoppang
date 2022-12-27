@@ -80,6 +80,14 @@ const Home = () => {
             >
               평점순
             </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setSearched([...posts].sort((a, b) => a.read - b.read));
+              }}
+              as="button"
+            >
+              조회순
+            </Dropdown.Item>
           </DropdownButton>
         </SortBox>
         {/* 글목록 */}
