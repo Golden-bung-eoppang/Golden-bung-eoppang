@@ -23,8 +23,8 @@ const Write = () => {
   const detailPost = useSelector((state) => state.posts.detailPost);
   const userID = useSelector((state) => state.user.user.id);
   // console.log('detailpost1234', detailPost);
-  console.log(id);
-  console.log('detail',detailPost)
+  // console.log(id);
+  // console.log('detail',detailPost)
   const [content, setContent] = useState(detailPost.content);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const Write = () => {
       rate,
     };
     
-    console.log(newpost)
+    // console.log(newpost)
     dispatch(__updatePostThunk(newpost));
     // 등록버튼 누르면 만들어진 id의 상세페이지로 이동
     navigate(`/${newpost.id}`);

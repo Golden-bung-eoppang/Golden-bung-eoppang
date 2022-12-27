@@ -105,7 +105,7 @@ const Home = () => {
                   key={posts.id}
                   onClick={() => {
                     setRead(posts.read);
-                    console.log(posts.read);
+                    // console.log(posts.read);
                     navigate(`/${posts.id}`);
                   }}
                 >

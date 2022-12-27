@@ -18,7 +18,7 @@ const Write = () => {
   const [content, setContent] = useState("");
   const userID = useSelector((state) => state.user.user.id);
 
-  console.log("userID", userID);
+  // console.log("userID", userID);
 
   // handler
   const onClickSubmitWriteHandler = (e) => {

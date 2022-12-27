@@ -22,7 +22,7 @@ const HomeSignModalBody = () => {
   }, [error]);
 
   useEffect(() => {
-    console.log("user", user);
+    // console.log("user", user);
     if (user) {
       dispatch(closeModal());
     }

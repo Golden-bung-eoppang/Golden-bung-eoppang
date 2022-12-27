@@ -20,7 +20,7 @@ export default function Post() {
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log("detailpost", detailPost);
+  // console.log("detailpost", detailPost);
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
@@ -210,7 +210,7 @@ const Contents = styled.div`
   flex-wrap: wrap;
 `;
 
-const CommentWrap = styled.form`
+const CommentWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

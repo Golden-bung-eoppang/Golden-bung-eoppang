@@ -32,7 +32,7 @@ export const __deletePost = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       await axios.delete(`http://localhost:3001/posts/${arg}`);
-      console.log(arg);
+      // console.log(arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -122,7 +122,7 @@ export const postViewSlice = createSlice({
     [__deletePost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.detailPost = action.payload;
-      console.log("action", action.payload);
+      // console.log("action", action.payload);
     },
     [__deletePost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -130,9 +130,9 @@ export const postViewSlice = createSlice({
     },
     [__updatePostThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("actionpayload", current(state));
+      // console.log("actionpayload", current(state));
       state.posts = action.payload;
-      console.log("actionpayload2", state);
+      // console.log("actionpayload2", state);
     },
     [__updatePostThunk.pending]: (state) => {
       state.isLoading = true;
