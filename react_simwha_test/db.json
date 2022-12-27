@@ -142,6 +142,30 @@
       "title": "awerawer",
       "content": "<p>1111111111111111111111</p>",
       "rate": 4
+    },
+    {
+      "user_id": "test123",
+      "id": "030fe6e8-fbfb-4429-8b58-561dab504dbd",
+      "title": "ㅁㅈㄷㄱㅁㅍ",
+      "content": "<p>ㅁㅈㄷㄱㅍㅁㅈㄷㄱㅍㅁㅈㄷㄱㅍ</p>",
+      "rate": 4,
+      "read": 0
+    },
+    {
+      "user_id": "test123",
+      "id": "68170f63-5a65-420e-8623-dab227f6f181",
+      "title": "ㅁㅈㄷㅅㅁㅈㄷ",
+      "content": "<p>ㅁㅈㄷㄱㅁ</p>",
+      "rate": 3,
+      "read": 0
+    },
+    {
+      "user_id": "test123",
+      "id": "fd2511ac-0385-4aa1-85fb-97a47edb0e32",
+      "title": "wwww",
+      "content": "<p>11111</p>",
+      "rate": 3,
+      "read": 0
     }
   ],
   "comments": [
@@ -186,6 +210,13 @@
       "id": 1672123713090,
       "username": "엄준식",
       "createdAt": "2022-12-27T06:48:33.090Z"
+    },
+    {
+      "comment_id": "030fe6e8-fbfb-4429-8b58-561dab504dbd",
+      "content": "ㄴ귯ㄴ귯ㄱ듓",
+      "id": 1672139659652,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T11:14:19.652Z"
     }
   ]
 }

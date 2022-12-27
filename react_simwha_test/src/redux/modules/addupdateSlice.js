@@ -62,6 +62,7 @@ export const addupdateSlice = createSlice({
         rate: "",
         title: "",
         content: "",
+        read: 0,
       };
     },
   },

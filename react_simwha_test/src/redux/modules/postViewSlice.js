@@ -56,6 +56,7 @@ export const postViewSlice = createSlice({
         rate: "",
         title: "",
         content: "",
+        read: 0,
       };
     },
   },

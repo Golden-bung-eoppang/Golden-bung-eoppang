@@ -1,38 +1,41 @@
-import React, {useEffect, useState} from 'react';
-import ReactStars from 'react-rating-stars-component';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
-import Editor from '../components/Editor';
-import { __addWriteThunk, __getPostThunk } from '../redux/modules/addupdateSlice';
-import {signUpUserThunk} from '../redux/modules/userSlice'
-import {useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
-import {render} from 'react-dom';
-import ReactHtmlParser from 'react-html-parser';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid'
+import React, { useEffect, useState } from "react";
+import ReactStars from "react-rating-stars-component";
+import styled from "styled-components";
+import Layout from "../components/Layout";
+import Editor from "../components/Editor";
+import {
+  __addWriteThunk,
+  __getPostThunk,
+} from "../redux/modules/addupdateSlice";
+import { signUpUserThunk } from "../redux/modules/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { render } from "react-dom";
+import ReactHtmlParser from "react-html-parser";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [content, setContent] = useState('');
-  const userID = useSelector((state)=>state.user.user.id)
- 
-  console.log('userID',userID)
+  const [content, setContent] = useState("");
+  const userID = useSelector((state) => state.user.user.id);
+
+  console.log("userID", userID);
 
   // handler
   const onClickSubmitWriteHandler = (e) => {
     e.preventDefault();
 
     // 유효성 검사
-    if (content === '' && title === '') {
-      alert('제목과 내용을 입력해주세요.');
+    if (content === "" && title === "") {
+      alert("제목과 내용을 입력해주세요.");
       return;
-    } else if (content === '') {
-      alert('내용을 입력해주세요.');
+    } else if (content === "") {
+      alert("내용을 입력해주세요.");
       return;
-    } else if (title === '') {
-      alert('제목을 입력해주세요.');
+    } else if (title === "") {
+      alert("제목을 입력해주세요.");
       return;
     }
 
@@ -42,6 +45,7 @@ const Write = () => {
       title,
       content,
       rate,
+      read: 0,
     };
 
     dispatch(__addWriteThunk(newpost));
@@ -52,7 +56,7 @@ const Write = () => {
   };
 
   // 제목
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const onChangeTitleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -69,26 +73,26 @@ const Write = () => {
       <form onSubmit={onClickSubmitWriteHandler}>
         <WirteContainer>
           <Flex
-            alingItems='center'
-            borderBottom='3px solid #f2d589'
-            width='250px'
+            alingItems="center"
+            borderBottom="3px solid #f2d589"
+            width="250px"
           >
             <Star>만족도ㅤ</Star>
             <ReactStars
               size={30}
-              activeColor='#f2d589'
+              activeColor="#f2d589"
               onChange={ratingChanged}
             />
           </Flex>
 
           <StyledInput
-            placeholder='제목을 입력해주세요.'
+            placeholder="제목을 입력해주세요."
             value={title}
             onChange={onChangeTitleHandler}
           />
           {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
           <Editor setContent={setContent} />
-          <Flex justifyCt='right' marginTop='60px'>
+          <Flex justifyCt="right" marginTop="60px">
             <AddButton>등록</AddButton>
           </Flex>
         </WirteContainer>

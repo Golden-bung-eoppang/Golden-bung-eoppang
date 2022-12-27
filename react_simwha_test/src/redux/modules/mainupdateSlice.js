@@ -60,6 +60,7 @@ export const mainupdateSlice = createSlice({
         rate: "",
         title: "",
         content: "",
+        read: 0,
       });
     },
   },

@@ -33,6 +33,10 @@ const Home = () => {
     );
   };
 
+  const setRead = (e) => {
+    e = e + 1;
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -88,6 +92,8 @@ const Home = () => {
                 <Item
                   key={posts.id}
                   onClick={() => {
+                    setRead(posts.read);
+                    console.log(posts.read);
                     navigate(`/${posts.id}`);
                   }}
                 >
