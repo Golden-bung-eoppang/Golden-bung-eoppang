@@ -1,42 +1,48 @@
-import React, { useEffect, useState } from "react";
-import ReactStars from "react-rating-stars-component";
-import styled from "styled-components";
-import Layout from "../components/Layout";
-import Editor from "../components/Editor";
-import {
-  __addWriteThunk,
-  __getPostThunk,
-} from "../redux/modules/addupdateSlice";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { render } from "react-dom";
-import ReactHtmlParser from "react-html-parser";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import ReactStars from 'react-rating-stars-component';
+import styled from 'styled-components';
+import Layout from '../components/Layout';
+import Editor from '../components/Editor';
+import {__addWriteThunk, __getPostThunk} from '../redux/modules/addupdateSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import axios from 'axios';
+import {render} from 'react-dom';
+import ReactHtmlParser from 'react-html-parser';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    const [content, setContent] = useState('');
+  const location = useLocation();
+  const {id} = useParams();
+  const detailPost = useSelector((state) => state.addupdateSlice.detailPost);
 
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    console.log('parmasid', id);
+    console.log('detailpost', detailPost);
+    dispatch(__getPostThunk(id));
+  }, [dispatch]);
 
   // handler
   const onClickSubmitWriteHandler = (e) => {
     e.preventDefault();
 
     // 유효성 검사
-    if (content === "" && title === "") {
-      alert("제목과 내용을 입력해주세요.");
+    if (content === '' && title === '') {
+      alert('제목과 내용을 입력해주세요.');
       return;
-    } else if (content === "") {
-      alert("내용을 입력해주세요.");
+    } else if (content === '') {
+      alert('내용을 입력해주세요.');
       return;
-    } else if (title === "") {
-      alert("제목을 입력해주세요.");
+    } else if (title === '') {
+      alert('제목을 입력해주세요.');
       return;
     }
 
     const newpost = {
-      user_id: "",
+      user_id: '',
       id: Date.now(),
       title,
       content,
@@ -51,7 +57,7 @@ const Write = () => {
   };
 
   // 제목
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const onChangeTitleHandler = (e) => {
     setTitle(e.target.value);
   };
@@ -62,35 +68,38 @@ const Write = () => {
     setRate(newRating);
   };
 
-
   return (
     <Layout>
       <StyledP>✏️ 우리동네의 붕어빵 맛집을 알려주세요.</StyledP>
       <form onSubmit={onClickSubmitWriteHandler}>
         <WirteContainer>
-          <Flex
-            alingItems="center"
-            borderBottom="3px solid #f2d589"
-            width="250px"
-          >
-            <Star>만족도ㅤ</Star>
-            <ReactStars
-              size={30}
-              activeColor="#f2d589"
-              onChange={ratingChanged}
-            />
-          </Flex>
+          {detailPost && (
+            <>
+              <Flex
+                alingItems='center'
+                borderBottom='3px solid #f2d589'
+                width='250px'
+              >
+                <Star>만족도ㅤ</Star>
+                <ReactStars
+                  size={30}
+                  activeColor='#f2d589'
+                  onChange={ratingChanged}
+                />
+              </Flex>
 
-          <StyledInput
-            placeholder="제목을 입력해주세요."
-            value={title}
-            onChange={onChangeTitleHandler}
-          />
-          {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
-          <Editor setContent={setContent} />
-          <Flex justifyCt="right" marginTop="60px">
-            <AddButton>등록</AddButton>
-          </Flex>
+              <StyledInput
+                placeholder='제목을 입력해주세요.'
+                value={detailPost.title}
+                onChange={onChangeTitleHandler}
+              />
+              {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
+              <Editor setContent={setContent} content={detailPost.content} />
+              <Flex justifyCt='right' marginTop='60px'>
+                <AddButton>등록</AddButton>
+              </Flex>
+            </>
+          )}
         </WirteContainer>
       </form>
       <div>{}</div>

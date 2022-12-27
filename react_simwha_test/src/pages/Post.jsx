@@ -15,9 +15,9 @@ export default function Post() {
   const detailPost = useSelector((state) => state.posts.detailPost);
   console.log(detailPost);
 
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location]);
+  // useEffect(() => {
+  //   console.log(location.pathname);
+  // }, [location]);
 
   useEffect(() => {
     console.log(123, "123");
@@ -46,6 +46,7 @@ export default function Post() {
               <WriteRate>⭐&nbsp;{detailPost.rate}점</WriteRate>
             </UserInfo>
             <Intro>나의 리뷰소개</Intro>
+              <button onClick={()=>navigate(`/write/${detailPost.id}`)}>수정</button>
 
             <Contents>{detailPost.content}</Contents>
           </>

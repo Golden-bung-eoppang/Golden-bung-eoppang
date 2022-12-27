@@ -10,7 +10,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { __getPostThunk } from "../redux/modules/addupdateSlice";
+import { __getPostThunk } from "../redux/modules/mainupdateSlice";
 import ReactHtmlParser from "react-html-parser";
 import ReactStars from "react-rating-stars-component";
 import { ScrollToTop } from "../components/ScrollToTop";
@@ -20,21 +20,8 @@ import inga from "../img/inga_bbang.jpg";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.addupdateSlice.posts);
-  const [userInput, setUserInput] = useState("");
-
-  // 입력값을 가져와서 소문자로변경 (대소문자의 차이가 있을 수 있기
-  //때문에 입력값과 데이터의 값을 하나로 통일)
-
-  const getValue = (e) => {
-    setUserInput(e.target.value.toLowerCase());
-  };
-
-  // 데이터 목록중, name에 사용자 입력값이 있는 데이터만 불러오기
-  // 사용자 입력값을 소문자로 변경해주었기 때문에 데이터도 소문자로
-  const searched = posts.filter((item) =>
-    item.content.toLowerCase().includes(userInput)
-  );
+  const posts = useSelector((state) => state.mainupdateSlice.posts);
+  console.log(posts);
 
   const navigate = useNavigate();
 
@@ -54,7 +41,6 @@ const Home = () => {
             placeholder="검색하고 싶은 제목, 내용, 닉네임을 입력하세요"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
-            onChange={getValue}
           />
           <Button
             variant="outline-secondary"
