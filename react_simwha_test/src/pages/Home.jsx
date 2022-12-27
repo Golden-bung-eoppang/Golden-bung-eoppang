@@ -43,7 +43,11 @@ const Home = () => {
     dispatch(__getPostThunk());
   }, []);
   if (isLoading) {
-    return "로딩중....";
+    return (
+      <>
+        <img src="/logo.png" height="58" alt="" /> "로딩중...."
+      </>
+    );
   }
   return (
     <Layout>

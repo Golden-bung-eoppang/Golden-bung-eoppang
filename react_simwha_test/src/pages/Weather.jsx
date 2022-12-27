@@ -48,13 +48,17 @@ export default function Weather() {
         <>
           <TextBox>
             <ImgBox src={moveimg} />
+            &nbsp;&nbsp;
             <Texts>
-              오늘 황금잉어빵 &nbsp;
-              {Math.abs(
-                Math.floor((weatherResult.data.main.temp - 273.15) * 10) / 10
-              ).toFixed(0)}
-              개 추천합니다&nbsp;(덥던 춥던 드세요)
+              {Math.floor((weatherResult.data.main.temp - 273.15) * 10) / 10 >=
+              0
+                ? "더운 날에 황금 잉어빵 안 (못) 팝니다."
+                : `${Math.abs(
+                    Math.floor((weatherResult.data.main.temp - 273.15) * 10) /
+                      10
+                  ).toFixed(0)} 개 먹는 것을 추천합니다~춥습니다!`}
             </Texts>
+            &nbsp;&nbsp;
             <ImgBox src={moveimg} />
           </TextBox>
 
@@ -120,10 +124,10 @@ const ResultWrap = styled.div`
   border-radius: 5px;
   background-color: #ffcd00;
   flex-wrap: wrap;
-  padding: 2px 85px;
+  padding: 2px 32px;
 `;
 const CityInputBox = styled.input`
-  width: 230px;
+  width: 188px;
   height: 40px;
   background-color: #ffcd00;
   padding: 5px;
@@ -135,7 +139,7 @@ const CityInputBox = styled.input`
   }
   margin: 0 0 0 10px;
   position: relative;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
 `;
 
