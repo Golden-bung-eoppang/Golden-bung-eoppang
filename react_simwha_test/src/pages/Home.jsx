@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import { Button, Dropdown, DropdownButton } from "react-bootstrap";
+import {
+  Button,
+  Dropdown,
+  DropdownButton,
+  Form,
+  InputGroup,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPostThunk } from "../redux/modules/addupdateSlice";
 import ReactHtmlParser from "react-html-parser";
@@ -15,6 +21,20 @@ import inga from "../img/inga_bbang.jpg";
 const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.addupdateSlice.posts);
+  const [userInput, setUserInput] = useState("");
+
+  // 입력값을 가져와서 소문자로변경 (대소문자의 차이가 있을 수 있기
+  //때문에 입력값과 데이터의 값을 하나로 통일)
+
+  const getValue = (e) => {
+    setUserInput(e.target.value.toLowerCase());
+  };
+
+  // 데이터 목록중, name에 사용자 입력값이 있는 데이터만 불러오기
+  // 사용자 입력값을 소문자로 변경해주었기 때문에 데이터도 소문자로
+  const searched = posts.filter((item) =>
+    item.content.toLowerCase().includes(userInput)
+  );
 
   const navigate = useNavigate();
 
@@ -29,7 +49,22 @@ const Home = () => {
       <MainBox>
         {/* 버튼 클릭 시 스크롤을 맨 위로 올려주는 컴포넌트 */}
         <ScrollToTop />
-        {/* 드랍다운만 부트스트랩 사용했습니다. */}
+        <InputGroup className="mb-3">
+          <Form.Control
+            placeholder="검색하고 싶은 제목, 내용, 닉네임을 입력하세요"
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+            onChange={getValue}
+          />
+          <Button
+            variant="outline-secondary"
+            id="button-addon2"
+            style={{ color: "white", backgroundColor: "#facb55" }}
+          >
+            검색
+          </Button>
+        </InputGroup>
+
         <SortBox>
           <DropdownButton id="dropdown-item-button" title="---정렬---">
             <Dropdown.Item as="button">전체</Dropdown.Item>

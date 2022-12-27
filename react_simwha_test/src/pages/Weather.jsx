@@ -79,6 +79,7 @@ export default function Weather() {
 const Text = styled.text`
   font-size: 20px;
   color: #6d6d00;
+  cursor: context-menu;
 `;
 const Texts = styled.span`
   color: white;
