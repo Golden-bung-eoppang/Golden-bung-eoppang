@@ -20,8 +20,15 @@ import inga from "../img/inga_bbang.jpg";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [userInput, setUserInput] = useState("");
   const posts = useSelector((state) => state.mainupdateSlice.posts);
-  console.log(posts);
+
+  const getValue = (e) => {
+    setUserInput(e.target.value.toLowerCase());
+  };
+  const searched = posts.filter((item) =>
+    item.content.toLowerCase().includes(userInput)
+  );
 
   const navigate = useNavigate();
 
@@ -41,6 +48,7 @@ const Home = () => {
             placeholder="검색하고 싶은 제목, 내용, 닉네임을 입력하세요"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
+            onChange={getValue}
           />
           <Button
             variant="outline-secondary"
