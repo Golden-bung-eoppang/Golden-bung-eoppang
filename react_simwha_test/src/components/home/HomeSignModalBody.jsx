@@ -87,7 +87,7 @@ const HomeSignModalBody = () => {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px 80px;
+  padding: 30px 80px;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -96,9 +96,10 @@ const Body = styled.div`
   flex: 1;
 `;
 const Wrapper = styled.div`
+  margin-top: 20px;
   margin-bottom: 16px;
 `;
-const Title = styled.h4`
+const Title = styled.h5`
   margin-bottom: 10px;
 `;
 const ButtonWrapper = styled.div`
