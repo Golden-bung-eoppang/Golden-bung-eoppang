@@ -36,9 +36,7 @@ export default function Post() {
 
     navigate("/");
   };
-  console.log(typeof detailPost.rate);
-  const STAR = detailPost.rate;
-  console.log(STAR);
+  const star = detailPost.rate;
   return (
     <Layout>
       <ImgButton
@@ -60,13 +58,25 @@ export default function Post() {
                 <UserName>{detailPost.user_id}&nbsp;&nbsp;</UserName>
                 &nbsp;&nbsp;
               </div>
-              {detailPost.rate}
-              <ReactStars
+              {/* <ReactStars
                 value={detailPost.rate}
                 size={30}
                 activeColor="#F2D589"
                 edit={false}
-              />
+              /> */}
+              <Stars>
+                {star === 1
+                  ? "★"
+                  : star === 2
+                  ? "★★"
+                  : star === 3
+                  ? "★★★"
+                  : star === 4
+                  ? "★★★★"
+                  : star === 5
+                  ? "★★★★★"
+                  : ""}
+              </Stars>
             </UserInfo>
             <Intro>
               나의 리뷰소개
@@ -97,7 +107,10 @@ export default function Post() {
     </Layout>
   );
 }
-
+const Stars = styled.span`
+  font-size: 35px;
+  color: #f2d589;
+`;
 const EditButton = styled.button`
   display: block;
   background-color: #ffcd00;
