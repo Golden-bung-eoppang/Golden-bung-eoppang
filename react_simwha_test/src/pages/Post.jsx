@@ -17,7 +17,7 @@ export default function Post() {
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log('detailpost',detailPost);
+  console.log("detailpost", detailPost);
 
   // useEffect(() => {
   //   console.log(location.pathname);
@@ -69,6 +69,7 @@ export default function Post() {
                     fontWeight: "bold",
                     borderColor: "#FFB300",
                     boxShadow: "0px 1px 1px 0px black",
+                    fontSize: "15px",
                   }}
                 >
                   수정
@@ -83,6 +84,7 @@ export default function Post() {
                     fontWeight: "bold",
                     borderColor: "#FFB300",
                     boxShadow: "0px 1px 1px 0px black",
+                    fontSize: "15px",
                   }}
                 >
                   삭제
