@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import axios from "axios";
 import {
   __getCommentsThunk,
@@ -9,14 +9,17 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [editComment, setEditComment] = useState("");
-  const editHandler = () => {
+  const editHandler = (event) => {
+    event.preventDefault();
     setIsEdit((prev) => !prev);
   };
+  const user = useSelector((state) => state.user.user);
   const deleteHandler = (event) => {
     event.preventDefault();
     const result = window.confirm("삭제하시겠습니까?");
@@ -26,19 +29,16 @@ const Comment = ({ comment }) => {
       return;
     }
   };
-  const toLogin = () => {
-    const result = window.confirm("로그인하시겠습니까?");
-    if (result) {
-      return;
-    } else {
-      return;
+  const editDoneHandler = (event) => {
+    event.preventDefault();
+    if (!editComment.trim()) {
+      return alert("내용을 입력해주세요.");
     }
-  };
-  const editDoneHandler = () => {
     dispatch(
       __updateComment({
         id: comment.id,
         content: editComment,
+        user_id: user.id,
       })
     );
     setEditComment("");
@@ -48,29 +48,40 @@ const Comment = ({ comment }) => {
     setEditComment(event.target.value);
   };
   return (
-    <CommListWrap>
-      {isEdit ? (
-        <ListInput
-          type="text"
-          value={editComment}
-          onChange={changeEditCommentHandler}
-        />
+    <>
+      {user && user.id === comment.user_id ? (
+        <CommListWrap>
+          {isEdit ? (
+            <ListInput
+              type="text"
+              value={editComment}
+              onChange={changeEditCommentHandler}
+            />
+          ) : (
+            <>
+              <div>{comment.user_id}</div>
+              <Diiv>{comment.content}</Diiv>
+            </>
+          )}
+          <CommentContent>
+            <ButtonWrap>
+              {isEdit ? (
+                <ListButton onClick={editDoneHandler}>완료</ListButton>
+              ) : (
+                <ListButton onClick={editHandler}>수정</ListButton>
+              )}
+              <DeleteButtonWrap disabled={isEdit} onClick={deleteHandler}>
+                삭제
+              </DeleteButtonWrap>
+            </ButtonWrap>
+          </CommentContent>
+        </CommListWrap>
       ) : (
-        <CommentContent>
-          <div>{comment.content}</div>
-          <ButtonWrap>
-            <DeleteButtonWrap disabled={isEdit} onClick={deleteHandler}>
-              삭제
-            </DeleteButtonWrap>
-            {isEdit ? (
-              <ListButton onClick={editDoneHandler}>완료</ListButton>
-            ) : (
-              <ListButton onClick={editHandler}>수정</ListButton>
-            )}
-          </ButtonWrap>
-        </CommentContent>
+        <CommListWrap>
+          <CommentContent>{comment.content}</CommentContent>
+        </CommListWrap>
       )}
-    </CommListWrap>
+    </>
   );
 };
 export default Comment;
@@ -81,9 +92,8 @@ const CommListWrap = styled.div`
 
 const CommentContent = styled.div`
   width: 730px;
-  border-bottom: 2px solid #ffcd00;
-
-  padding-top: 10px;
+  border-bottom: 2px solid #e0e0e0;
+  margin-top: 2px;
   font-size: 17px;
 `;
 
@@ -97,7 +107,7 @@ const ButtonWrap = styled.div`
   margin-bottom: 10px;
 `;
 
-const DeleteButtonWrap = styled.button`
+const ListButton = styled.button`
   margin-right: 10px;
   margin-left: 130px;
   display: block;
@@ -110,7 +120,7 @@ const DeleteButtonWrap = styled.button`
   box-shadow: 0px 1px 1px 0px black;
   font-size: 12px;
 `;
-const ListButton = styled.button`
+const DeleteButtonWrap = styled.button`
   display: block;
   background-color: #ffcd00;
   color: #3e2723;
@@ -120,4 +130,8 @@ const ListButton = styled.button`
   border-color: #ffb300;
   box-shadow: 0px 1px 1px 0px black;
   font-size: 12px;
+`;
+const Diiv = styled.div`
+  padding-top: 50px;
+  display: flex;
 `;

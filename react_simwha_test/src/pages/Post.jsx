@@ -17,9 +17,12 @@ export default function Post() {
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
 
-  useEffect(() => {}, [location]);
+  // useEffect(() => {
+  //   console.log(location.pathname);
+  // }, [location]);
 
   useEffect(() => {
+    // console.log(123, "123");
     dispatch(__getPostViewThunk(location.pathname));
   }, [dispatch]);
 
@@ -33,7 +36,6 @@ export default function Post() {
       >
         <ImgBox src={backImg} />
       </ImgButton>
-
       <PageContainer>
         {detailPost && (
           <>
@@ -65,6 +67,10 @@ export default function Post() {
                     fontWeight: "bold",
                     borderColor: "#FFB300",
                     boxShadow: "0px 1px 1px 0px black",
+                    fontSize: "15px",
+                  }}
+                  onClick={() => {
+                    navigate(`/write/${detailPost.id}`);
                   }}
                 >
                   수정
@@ -79,6 +85,7 @@ export default function Post() {
                     fontWeight: "bold",
                     borderColor: "#FFB300",
                     boxShadow: "0px 1px 1px 0px black",
+                    fontSize: "15px",
                   }}
                 >
                   삭제
@@ -168,10 +175,8 @@ const Contents = styled.div`
   flex-wrap: wrap;
 `;
 
-
-const CommentWrap = styled.form`
-  
+const CommentWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-`
+`;

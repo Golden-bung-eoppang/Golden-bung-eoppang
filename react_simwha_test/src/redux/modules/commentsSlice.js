@@ -6,9 +6,8 @@ export const __getCommnetsByTodoId = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/comments?comment_id=${arg}`
+        `http://localhost:3001/comments?post_id=${arg}`
       );
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -44,6 +43,7 @@ export const __updateComment = createAsyncThunk(
   "UPDATE_COMMENT",
   async (arg, thunkAPI) => {
     try {
+      console.log(arg);
       axios.patch(`http://localhost:3001/comments/${arg.id}`, arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {

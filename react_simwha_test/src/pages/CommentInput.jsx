@@ -4,12 +4,15 @@ import uuid from "react-uuid";
 import { useParams } from "react-router-dom";
 import { __addComment } from "../redux/modules/commentsSlice";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { openModal } from "../redux/modules/modalSlice";
 
 function CommentInput() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const cid = uuid();
   const [comments, setComments] = useState("");
+  const user = useSelector((state) => state.user.user);
   const commentsChangeHandler = (e) => {
     setComments(e.target.value);
   };
@@ -20,29 +23,52 @@ function CommentInput() {
     }
     dispatch(
       __addComment({
-        comment_id: id,
+        post_id: id,
         content: comments,
-        id: Date.now(),
-        username: "엄준식",
+        id: uuid(),
+        user_id: user.id,
         createdAt: new Date(),
       })
     );
     setComments("");
   };
+  const toLogin = () => {
+    const result = window.confirm("로그인하시겠습니까?");
+    if (result) {
+      dispatch(openModal);
+    } else {
+      return;
+    }
+  };
   return (
     <CommentWrap>
-      <form>
-        <Input
-          type="text"
-          value={comments}
-          onChange={commentsChangeHandler}
-          placeholder="댓글을 입력하세요"
-        />
+      {user ? (
+        <form>
+          <Input
+            type="text"
+            value={comments}
+            onChange={commentsChangeHandler}
+            placeholder="댓글을 입력하세요"
+          />
 
-        <CommentAddButton onClick={AddCommentsHandler}>
-          등록하기
-        </CommentAddButton>
-      </form>
+          <CommentAddButton onClick={AddCommentsHandler}>
+            등록하기
+          </CommentAddButton>
+        </form>
+      ) : (
+        <form>
+          <label onClick={toLogin} htmlFor="editInput">
+            <Input
+              type="text"
+              value={comments}
+              onChange={commentsChangeHandler}
+              placeholder="댓글을 입력하세요"
+              disabled={true}
+              id="editInput"
+            />
+          </label>
+        </form>
+      )}
     </CommentWrap>
   );
 }
@@ -65,7 +91,7 @@ const Input = styled.input`
   font-size: 18px;
   padding-bottom: 40px;
 `;
-const CommentAddButton = styled.div`
+const CommentAddButton = styled.button`
   display: flex;
   width: 100px;
   height: 30px;

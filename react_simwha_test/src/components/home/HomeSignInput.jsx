@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 
-const HomeSignInput = ({ value, setValue, placeholder, type = "text" }) => {
-  return <Block value={value} type={type} onChange={({ target: { value } }) => setValue(value)} placeholder={placeholder} />;
+const HomeSignInput = ({ placeholder, type = "text" }, ref) => {
+  return <Block ref={ref} type={type} placeholder={placeholder} />;
 };
 
 const Block = styled.input`
@@ -15,4 +15,4 @@ const Block = styled.input`
   font-size: 1rem;
 `;
 
-export default HomeSignInput;
+export default forwardRef(HomeSignInput);

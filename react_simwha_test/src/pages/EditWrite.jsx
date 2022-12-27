@@ -6,22 +6,31 @@ import Editor from "../components/Editor";
 import {
   __addWriteThunk,
   __getPostThunk,
+  __updatePostThunk,
 } from "../redux/modules/addupdateSlice";
-import { signUpUserThunk } from "../redux/modules/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { render } from "react-dom";
 import ReactHtmlParser from "react-html-parser";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [content, setContent] = useState("");
-  const userID = useSelector((state) => state.user.user.id);
+  const location = useLocation();
+  const { id } = useParams();
+  const detailPost = useSelector((state) => state.addupdateSlice.detailPost);
+  const { post } = useSelector((state) => state.addupdateSlice.posts);
 
-  console.log("userID", userID);
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    dispatch(__getPostThunk(id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(__updatePostThunk(id));
+  }, [dispatch]);
 
   // handler
   const onClickSubmitWriteHandler = (e) => {
@@ -40,8 +49,8 @@ const Write = () => {
     }
 
     const newpost = {
-      user_id: userID,
-      id: uuidv4(),
+      user_id: "",
+      id: Date.now(),
       title,
       content,
       rate,
@@ -71,29 +80,34 @@ const Write = () => {
       <StyledP>✏️ 우리동네의 붕어빵 맛집을 알려주세요.</StyledP>
       <form onSubmit={onClickSubmitWriteHandler}>
         <WirteContainer>
-          <Flex
-            alingItems="center"
-            borderBottom="3px solid #f2d589"
-            width="250px"
-          >
-            <Star>만족도ㅤ</Star>
-            <ReactStars
-              size={30}
-              activeColor="#f2d589"
-              onChange={ratingChanged}
-            />
-          </Flex>
+          {detailPost && (
+            <>
+              <Flex
+                alingItems="center"
+                borderBottom="3px solid #f2d589"
+                width="250px"
+              >
+                <Star>만족도ㅤ</Star>
+                <ReactStars
+                  size={30}
+                  activeColor="#f2d589"
+                  onChange={ratingChanged}
+                  value={detailPost.rate}
+                />
+              </Flex>
 
-          <StyledInput
-            placeholder="제목을 입력해주세요."
-            value={title}
-            onChange={onChangeTitleHandler}
-          />
-          {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
-          <Editor setContent={setContent} />
-          <Flex justifyCt="right" marginTop="60px">
-            <AddButton>등록</AddButton>
-          </Flex>
+              <StyledInput
+                placeholder="제목을 입력해주세요."
+                defaultValue={detailPost.title}
+                onChange={onChangeTitleHandler}
+              />
+              {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
+              <Editor setContent={setContent} content={detailPost.content} />
+              <Flex justifyCt="right" marginTop="60px">
+                <AddButton>수정</AddButton>
+              </Flex>
+            </>
+          )}
         </WirteContainer>
       </form>
       <div>{}</div>
