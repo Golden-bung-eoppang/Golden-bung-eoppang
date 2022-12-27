@@ -3,7 +3,11 @@ import ReactStars from 'react-rating-stars-component';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Editor from '../components/Editor';
-import {__addWriteThunk, __getPostThunk} from '../redux/modules/addupdateSlice';
+import {
+  __addWriteThunk,
+  __getPostThunk,
+  __updatePostThunk,
+} from '../redux/modules/addupdateSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {render} from 'react-dom';
@@ -16,13 +20,18 @@ const Write = () => {
   const location = useLocation();
   const {id} = useParams();
   const detailPost = useSelector((state) => state.addupdateSlice.detailPost);
+  const {post} = useSelector((state) => state.addupdateSlice.posts);
 
   const [content, setContent] = useState('');
 
   useEffect(() => {
+    dispatch(__getPostThunk(id));
+  }, [dispatch]);
+
+  useEffect(() => {
     console.log('parmasid', id);
     console.log('detailpost', detailPost);
-    dispatch(__getPostThunk(id));
+    dispatch(__updatePostThunk(id));
   }, [dispatch]);
 
   // handler
@@ -85,18 +94,19 @@ const Write = () => {
                   size={30}
                   activeColor='#f2d589'
                   onChange={ratingChanged}
+                  value={detailPost.rate}
                 />
               </Flex>
 
               <StyledInput
                 placeholder='제목을 입력해주세요.'
-                value={detailPost.title}
+                defaultValue={detailPost.title}
                 onChange={onChangeTitleHandler}
               />
               {/* 라이브러리 사용으로 setContent만 해서 content 변경함 */}
               <Editor setContent={setContent} content={detailPost.content} />
               <Flex justifyCt='right' marginTop='60px'>
-                <AddButton>등록</AddButton>
+                <AddButton>수정</AddButton>
               </Flex>
             </>
           )}

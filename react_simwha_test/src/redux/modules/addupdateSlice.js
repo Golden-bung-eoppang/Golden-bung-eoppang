@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
 export const __addWriteThunk = createAsyncThunk(
   "ADD_WRITE", // action value
   async (payload, thunkAPI) => {
     // 콜백함수
-    console.log('payload', payload);
     try {
       const { data } = await axios.post(`http://localhost:3001/posts`, payload); 
       return thunkAPI.fulfillWithValue(data);
@@ -16,11 +16,11 @@ export const __addWriteThunk = createAsyncThunk(
 );
 
 export const __getPostThunk = createAsyncThunk(
-  "GET_POSTS",
-  async (id, thunkAPI) => {
+  "ADDGET_POSTS",
+  async (postId, thunkAPI) => {
     try {
-      console.log('id', id);
-      const { data } = await axios.get(`http://localhost:3001/posts/${id}`);
+      console.log('id', postId);
+      const {data} = await axios.get(`http://localhost:3001/posts/${postId}`);
       console.log('data',data)
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -29,17 +29,17 @@ export const __getPostThunk = createAsyncThunk(
   }
 );
 
-// export const __updatePostThunk = createAsyncThunk(
-//   "UPDATE_POST",
-//   async (id, thunkAPI) => {
-//     try {
-//       axios.patch(`http://localhost:3001/todos/${id}`, id);
-//       return thunkAPI.fulfillWithValue(id);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.code);
-//     }
-//   }
-// );
+export const __updatePostThunk = createAsyncThunk(
+  "UPDATE_POST",
+  async (id, thunkAPI) => {
+    try {
+      axios.patch(`http://localhost:3001/todos/${id}`, id);
+      return thunkAPI.fulfillWithValue(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
 
 const initialState = {
   posts: [],
@@ -49,7 +49,7 @@ const initialState = {
 };
 
 export const addupdateSlice = createSlice({
-  name: "posts",
+  name: "addupdateposts",
   initialState,
   reducers: {
     addPost: (state, action) => {
@@ -57,11 +57,11 @@ export const addupdateSlice = createSlice({
     },
     clearPosts: (state) => {
       state.posts = {
-        user_id: "",
-        id: Date.now(),
-        rate: "",
-        title: "",
-        content: "",
+        user_id: '',
+        id: uuidv4(),
+        rate: '',
+        title: '',
+        content: '',
       };
     },
   },
@@ -88,17 +88,17 @@ export const addupdateSlice = createSlice({
     [__getPostThunk.pending]: (state) => {
       state.isLoading = true;
     },
-    // [__updatePostThunk.fulfilled]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.todo = action.payload;
-    // },
-    // [__updatePostThunk.pending]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [__updatePostThunk.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
+    [__updatePostThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.posts = action.payload;
+    },
+    [__updatePostThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updatePostThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 

@@ -21,10 +21,10 @@ import inga from "../img/inga_bbang.jpg";
 const Home = () => {
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState("");
-  const posts = useSelector((state) => state.mainupdateSlice.posts);
+  const { posts, isLoading } = useSelector((state) => state.mainupdateSlice);
 
   const getValue = (e) => {
-    setUserInput(e.target.value.toLowerCase());
+    setUserInput(e.target.value.toLowerCase("posts"));
   };
   const searched = posts.filter((item) =>
     item.content.toLowerCase().includes(userInput)
@@ -35,7 +35,9 @@ const Home = () => {
   useEffect(() => {
     dispatch(__getPostThunk());
   }, [dispatch]);
-
+  if (isLoading) {
+    return "로딩중....";
+  }
   return (
     <Layout>
       <Weather />

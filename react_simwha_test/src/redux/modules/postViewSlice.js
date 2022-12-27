@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {v4 as uuidv4} from 'uuid';
 
 export const __getPostViewThunk = createAsyncThunk(
   "GET_POSTS",
   async (id, thunkAPI) => {
-    console.log("id", id);
+    // console.log("id", id);
     try {
       const { data } = await axios.get(`http://localhost:3001/posts${id}`);
-      console.log(data);
+      console.log('getpostdata',data);
       return thunkAPI.fulfillWithValue(data); //action.payload이다.
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -40,11 +41,11 @@ export const postViewSlice = createSlice({
   reducers: {
     clearPosts: (state) => {
       state.posts = {
-        user_id: "",
-        id: Date.now(),
-        rate: "",
-        title: "",
-        content: "",
+        user_id: '',
+        id: uuidv4(),
+        rate: '',
+        title: '',
+        content: '',
       };
     },
   },
@@ -52,6 +53,7 @@ export const postViewSlice = createSlice({
     [__getPostViewThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.detailPost = action.payload;
+      console.log('action',action.payload);
     },
     [__getPostViewThunk.rejected]: (state, action) => {
       state.isLoading = false;
