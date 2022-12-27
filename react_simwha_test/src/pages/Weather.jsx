@@ -59,7 +59,7 @@ export default function Weather() {
           </TextBox>
 
           <ResultWrap>
-            <City>{weatherResult.data.name}&nbsp;&nbsp;&nbsp;</City>
+            <City>🌏&nbsp;{weatherResult.data.name}&nbsp;&nbsp;&nbsp;</City>
 
             <Temp>
               {Math.round((weatherResult.data.main.temp - 273.15) * 10) / 10}
@@ -115,12 +115,12 @@ const ResultWrap = styled.div`
   align-content: center;
   align-items: center;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 8px;
   border: 1px solid #ffcd00;
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: #ffcd00;
   flex-wrap: wrap;
-  padding: 10px 20px;
+  padding: 2px 85px;
 `;
 const CityInputBox = styled.input`
   width: 230px;
