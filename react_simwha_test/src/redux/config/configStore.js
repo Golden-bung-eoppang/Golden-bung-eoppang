@@ -7,12 +7,10 @@ import posts from "../modules/postViewSlice";
 import modal from "../modules/modalSlice";
 import addupdateSlice from "../modules/addupdateSlice";
 import mainupdateSlice from "../modules/mainupdateSlice";
-
 const persistConfig = {
   key: "root",
   storage,
 };
-
 const reducers = combineReducers({
   comments,
   user,
@@ -21,19 +19,8 @@ const reducers = combineReducers({
   addupdateSlice,
   mainupdateSlice,
 });
-
 const persistedReducer = persistReducer(persistConfig, reducers);
-
 const store = configureStore({
-  reducer: {
-    user,
-    posts,
-    comments,
-    persistedReducer,
-    modal,
-    addupdateSlice,
-    mainupdateSlice,
-  },
+  reducer: persistedReducer,
 });
-
 export default store;
