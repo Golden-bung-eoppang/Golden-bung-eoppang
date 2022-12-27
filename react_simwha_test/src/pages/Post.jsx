@@ -20,20 +20,10 @@ export default function Post() {
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-<<<<<<< HEAD
-
-  // useEffect(() => {
-  //   console.log(location.pathname);
-  // }, [location]);
-
-  useEffect(() => {
-    // console.log(123, "123");
-=======
   console.log("detailpost", detailPost);
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
->>>>>>> 9d659a177aa670485c68fe8e3c6411a01370fc20
     dispatch(__getPostViewThunk(location.pathname));
   }, [dispatch]);
 
@@ -220,11 +210,7 @@ const Contents = styled.div`
   flex-wrap: wrap;
 `;
 
-<<<<<<< HEAD
 const CommentWrap = styled.div`
-=======
-const CommentWrap = styled.form`
->>>>>>> 9d659a177aa670485c68fe8e3c6411a01370fc20
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

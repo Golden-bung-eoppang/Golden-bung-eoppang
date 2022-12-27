@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import validateId from "../../lib/validateId";
 import { closeModal } from "../../redux/modules/modalSlice";
-import { setInitialState, signInUserThunk, signUpUserThunk } from "../../redux/modules/userSlice";
+import {
+  setInitialState,
+  signInUserThunk,
+  signUpUserThunk,
+} from "../../redux/modules/userSlice";
 import HomeSignInput from "./HomeSignInput";
 
 const HomeSignModalBody = () => {
@@ -22,7 +26,6 @@ const HomeSignModalBody = () => {
   }, [error]);
 
   useEffect(() => {
-    console.log("user", user);
     if (user) {
       dispatch(closeModal());
     }
@@ -40,7 +43,9 @@ const HomeSignModalBody = () => {
       return alert("이름을 입력해주세요");
     }
     if (!validateId(id)) {
-      return alert("아이디는 영문자로 시작하는 영문자 또는 숫자 6~20자리로 입력해주세요.");
+      return alert(
+        "아이디는 영문자로 시작하는 영문자 또는 숫자 6~20자리로 입력해주세요."
+      );
     }
     if (status === "로그인") {
       dispatch(signInUserThunk({ id, password }));
@@ -64,7 +69,11 @@ const HomeSignModalBody = () => {
         </Wrapper>
         <Wrapper>
           <Title>비밀번호</Title>
-          <HomeSignInput ref={passwordRef} type="password" placeholder="비밀번호를 입력하세요." />
+          <HomeSignInput
+            ref={passwordRef}
+            type="password"
+            placeholder="비밀번호를 입력하세요."
+          />
         </Wrapper>
         {status === "회원가입" && (
           <Wrapper>
@@ -77,8 +86,16 @@ const HomeSignModalBody = () => {
         </ButtonWrapper>
       </Body>
       <Footer>
-        <p>{status === "로그인" ? "아직 회원이 아니신가요?" : "계정이 이미 있으신가요?"}</p>
-        <span onClick={() => setStatus(status === "로그인" ? "회원가입" : "로그인")}>{status === "로그인" ? "회원가입" : "로그인"}</span>
+        <p>
+          {status === "로그인"
+            ? "아직 회원이 아니신가요?"
+            : "계정이 이미 있으신가요?"}
+        </p>
+        <span
+          onClick={() => setStatus(status === "로그인" ? "회원가입" : "로그인")}
+        >
+          {status === "로그인" ? "회원가입" : "로그인"}
+        </span>
       </Footer>
     </Container>
   );
