@@ -5,78 +5,84 @@ import Layout from '../components/Layout';
 import Editor from '../components/Editor';
 import {
   __addWriteThunk,
-  __getPostThunk,
+  __getPostViewThunk,
   __updatePostThunk,
-} from '../redux/modules/addupdateSlice';
+} from '../redux/modules/postViewSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {render} from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid'
 
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const {id} = useParams();
-  const detailPost = useSelector((state) => state.addupdateSlice.detailPost);
-  const {post} = useSelector((state) => state.addupdateSlice.posts);
-
-  const [content, setContent] = useState('');
-
-  useEffect(() => {
-    dispatch(__getPostThunk(id));
-  }, [dispatch]);
+  const detailPost = useSelector((state) => state.posts.detailPost);
+  const userID = useSelector((state) => state.user.user.id);
+  // console.log('detailpost1234', detailPost);
+  console.log(id);
+  console.log('detail',detailPost)
+  const [content, setContent] = useState(detailPost.content);
 
   useEffect(() => {
-    console.log('parmasid', id);
-    console.log('detailpost', detailPost);
-    dispatch(__updatePostThunk(id));
+    dispatch(__getPostViewThunk(id));
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   console.log('parmasid', id);
+  //   console.log('detailpost', detailPost);
+  //   dispatch(__updatePostThunk(id));
+  // }, [dispatch]);
+
+  // 제목
+  const [title, setTitle] = useState(detailPost.title);
+  const onChangeTitleHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+    useEffect(() => {
+      dispatch(__getPostViewThunk(id));
+    }, detailPost.rate);
+
+  // 별점 라이브러리
+  const [rate, setRate] = useState(detailPost.rate);
+  const ratingChanged = (newRating) => {
+    setRate(newRating);
+  };
 
   // handler
   const onClickSubmitWriteHandler = (e) => {
     e.preventDefault();
 
     // 유효성 검사
-    if (content === '' && title === '') {
+    if (content == '' && title == '') {
       alert('제목과 내용을 입력해주세요.');
       return;
-    } else if (content === '') {
+    } else if (content == '') {
       alert('내용을 입력해주세요.');
       return;
-    } else if (title === '') {
+    } else if (title == '') {
       alert('제목을 입력해주세요.');
       return;
     }
 
     const newpost = {
-      user_id: '',
-      id: Date.now(),
+      user_id: userID,
+      id: id,
       title,
       content,
       rate,
     };
-
-    dispatch(__addWriteThunk(newpost));
-
+    
+    console.log(newpost)
+    dispatch(__updatePostThunk(newpost));
     // 등록버튼 누르면 만들어진 id의 상세페이지로 이동
     navigate(`/${newpost.id}`);
-    // 브라우저 라우터 뒤에 : 가 들어가있으면 : 뒤에 붙는건 변수명 이라는 뜻
   };
-
-  // 제목
-  const [title, setTitle] = useState('');
-  const onChangeTitleHandler = (e) => {
-    setTitle(e.target.value);
-  };
-
-  // 별점 라이브러리
-  const [rate, setRate] = useState(0);
-  const ratingChanged = (newRating) => {
-    setRate(newRating);
-  };
-
+  
   return (
     <Layout>
       <StyledP>✏️ 우리동네의 붕어빵 맛집을 알려주세요.</StyledP>

@@ -1,9 +1,23 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import {v4 as uuidv4} from 'uuid';
 
+
+export const __addWriteThunk = createAsyncThunk(
+  'POSTADD_WRITE', // action value
+  async (payload, thunkAPI) => {
+    // 콜백함수
+    try {
+      const {data} = await axios.post(`http://localhost:3001/posts`, payload);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __getPostViewThunk = createAsyncThunk(
-  "GET_POSTS",
+  "POSTGET_POSTS",
   async (id, thunkAPI) => {
     // console.log("id", id);
     try {
@@ -16,7 +30,7 @@ export const __getPostViewThunk = createAsyncThunk(
 );
 
 export const __deletePost = createAsyncThunk(
-  'DELETE_POST',
+  'POSTDELETE_POST',
   async (arg, thunkAPI) => {
     try {
       await axios.delete(`http://localhost:3001/posts/${arg}`);
@@ -27,17 +41,18 @@ export const __deletePost = createAsyncThunk(
     }
   }
 );
-// export const __updateTodoThunk = createAsyncThunk(
-//   "UPDATE_TODO",
-//   async (arg, thunkAPI) => {
-//     try {
-//       axios.patch(`http://localhost:3001/todos/${arg.id}`, arg);
-//       return thunkAPI.fulfillWithValue(arg);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.code);
-//     }
-//   }
-// );
+
+export const __updatePostThunk = createAsyncThunk(
+  'POSTUPDATE_POST',
+  async (payload, thunkAPI) => {
+    try {
+      await axios.patch(`http://localhost:3001/posts/${payload.id}`, payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
 
 const initialState = {
   posts: [],
@@ -50,6 +65,9 @@ export const postViewSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
+    addPost: (state, action) => {
+      state.posts.push(action.payload);
+    },
     clearPosts: (state) => {
       state.posts = {
         user_id: '',
@@ -57,14 +75,25 @@ export const postViewSlice = createSlice({
         rate: '',
         title: '',
         content: '',
+        username: '',
       };
     },
   },
   extraReducers: {
+    [__addWriteThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      current(state).posts.push(action.payload);
+    },
+    [__addWriteThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__addWriteThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
     [__getPostViewThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.detailPost = action.payload;
-
     },
     [__getPostViewThunk.rejected]: (state, action) => {
       state.isLoading = false;
@@ -85,8 +114,21 @@ export const postViewSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    [__updatePostThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log('actionpayload', current(state));
+      state.posts = action.payload;
+      console.log('actionpayload2', state)
+    },
+    [__updatePostThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updatePostThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { clearPosts } = postViewSlice.actions;
+export const {clearPosts, addPost} = postViewSlice.actions;
 export default postViewSlice.reducer;

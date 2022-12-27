@@ -3,22 +3,22 @@ import ReactStars from 'react-rating-stars-component';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Editor from '../components/Editor';
-import { __addWriteThunk, __getPostThunk } from '../redux/modules/addupdateSlice';
-import {signUpUserThunk} from '../redux/modules/userSlice'
+import {__addWriteThunk} from '../redux/modules/postViewSlice';
+import {signUpUserThunk} from '../redux/modules/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {render} from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid'
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
 
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [content, setContent] = useState('');
-  const userID = useSelector((state)=>state.user.user.id)
- 
-  console.log('userID',userID)
+  const userID = useSelector((state) => state.user.user.id);
+
+  console.log('userID', userID);
 
   // handler
   const onClickSubmitWriteHandler = (e) => {

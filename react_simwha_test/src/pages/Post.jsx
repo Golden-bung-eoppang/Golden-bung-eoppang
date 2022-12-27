@@ -18,7 +18,7 @@ export default function Post() {
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log(detailPost)
+  console.log('detailpost', detailPost);
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
@@ -35,7 +35,9 @@ export default function Post() {
 
     navigate('/');
   };
-
+  console.log(typeof detailPost.rate);
+  const STAR = detailPost.rate;
+  console.log(STAR)
   return (
     <Layout>
       <ImgButton
@@ -57,12 +59,13 @@ export default function Post() {
                 <UserName>{detailPost.user_id}&nbsp;&nbsp;</UserName>
                 &nbsp;&nbsp;
               </div>
+              {detailPost.rate}
               <ReactStars
-                count={detailPost.rate}
+                value={detailPost.rate}
                 size={30}
-                color='#F2D589'
                 activeColor='#F2D589'
-              ></ReactStars>
+                edit={false}
+              />
             </UserInfo>
             <Intro>
               나의 리뷰소개
@@ -70,7 +73,7 @@ export default function Post() {
                 <Button>
                   <EditButton
                     onClick={() => {
-                      navigate(`/write/${detailPost.id}`);
+                      navigate(`/write${location.pathname}`);
                     }}
                   >
                     수정
