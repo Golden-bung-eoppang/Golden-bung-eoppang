@@ -55,15 +55,9 @@ const Home = () => {
             placeholder="검색하고 싶은 제목, 내용, 닉네임을 입력하세요"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
+            style={{ height: "60px", fontSize: "20px" }}
             onChange={getValue}
           />
-          <Button
-            variant="outline-secondary"
-            id="button-addon2"
-            style={{ color: "white", backgroundColor: "#facb55" }}
-          >
-            검색
-          </Button>
         </InputGroup>
 
         <SortBox>

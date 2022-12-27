@@ -3,7 +3,8 @@ import ReactStars from 'react-rating-stars-component';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Editor from '../components/Editor';
-import {__addWriteThunk, __getPostThunk} from '../redux/modules/addupdateSlice';
+import { __addWriteThunk, __getPostThunk } from '../redux/modules/addupdateSlice';
+import {signUpUserThunk} from '../redux/modules/userSlice'
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {render} from 'react-dom';
@@ -15,6 +16,9 @@ const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [content, setContent] = useState('');
+  const userID = useSelector((state)=>state.user.user.id)
+ 
+  console.log('userID',userID)
 
   // handler
   const onClickSubmitWriteHandler = (e) => {
@@ -33,7 +37,7 @@ const Write = () => {
     }
 
     const newpost = {
-      user_id: '',
+      user_id: userID,
       id: uuidv4(),
       title,
       content,
