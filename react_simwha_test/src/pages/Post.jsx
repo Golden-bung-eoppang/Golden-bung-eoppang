@@ -13,14 +13,14 @@ export default function Post() {
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log(detailPost);
+  console.log('detailpost',detailPost);
 
   // useEffect(() => {
   //   console.log(location.pathname);
   // }, [location]);
 
   useEffect(() => {
-    console.log(123, "123");
+    // console.log(123, "123");
     dispatch(__getPostViewThunk(location.pathname));
   }, [dispatch]);
 

@@ -1,5 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import {v4 as uuidv4} from 'uuid';
+
 
 export const __addWriteThunk = createAsyncThunk(
   'ADD_WRITE', // action value
@@ -16,7 +18,7 @@ export const __addWriteThunk = createAsyncThunk(
 );
 
 export const __getPostThunk = createAsyncThunk(
-  'GET_POSTS',
+  'GETMAIN_POSTS',
   async (payload, thunkAPI) => {
     try {
       const {data} = await axios.get(`http://localhost:3001/posts`);
@@ -44,24 +46,23 @@ const initialState = {
   posts: [],
   error: null, // 서버랑 통신 실패 시 나타내는 에러메세지 담아놓는 값
   isLoading: false, // 서버에서 posts를 가져오는 상태값
-  detailPost: null,
 };
 
 export const mainupdateSlice = createSlice({
-  name: 'posts',
+  name: 'updateposts',
   initialState,
   reducers: {
-    addPost: (state, action) => {
-      state.posts.push(action.payload);
-    },
+    // addPost: (state, action) => {
+    //   return state.posts.push(action.payload);
+    // },
     clearPosts: (state) => {
-      state.posts = {
+      return (state.posts = {
         user_id: '',
-        id: Date.now(),
+        id: uuidv4(),
         rate: '',
         title: '',
         content: '',
-      };
+      });
     },
   },
   extraReducers: {
@@ -79,6 +80,7 @@ export const mainupdateSlice = createSlice({
     [__getPostThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts = action.payload;
+      console.log('reducer', action.payload);
     },
     [__getPostThunk.rejected]: (state, action) => {
       state.isLoading = false;
@@ -101,5 +103,5 @@ export const mainupdateSlice = createSlice({
   },
 });
 
-export const {addPost} = mainupdateSlice.actions;
+export const {clearPosts} = mainupdateSlice.actions;
 export default mainupdateSlice.reducer;

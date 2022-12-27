@@ -9,7 +9,7 @@ export default function Editor({setContent, content}) {
     <ReactQuill
       theme='snow'
       onChange={setContent}
-      value={content}
+      defaultValue={content}
       style={{height: 700}}
       placeholder={'내용을 입력해주세요.'}
     />

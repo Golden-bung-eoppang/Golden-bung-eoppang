@@ -13,15 +13,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.mainupdateSlice.posts);
-  console.log(posts)
+  const {posts, isLoading} = useSelector((state) => state.mainupdateSlice);
+  console.log("posts",posts)
 
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostThunk());
   }, [dispatch]);
-
+  if (isLoading) {
+    return '로딩중....'
+  }
   return (
     <Layout>
       <Weather />
