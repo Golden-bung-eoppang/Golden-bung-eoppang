@@ -1,32 +1,40 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { __getPostViewThunk } from "../redux/modules/postViewSlice";
-import backImg from "../img/back.png";
-import goldenKing from "../img/goldenKing.png";
-import Layout from "../components/Layout";
-import styled from "styled-components";
-import Comment from "./Comment";
-import ReactStars from "react-rating-stars-component";
-import ReactHtmlParser from "react-html-parser";
-import CommentInput from "../components/CommentInput";
-import CommentList from "../components/CommentList";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {__deletePost, __getPostViewThunk} from '../redux/modules/postViewSlice';
+import {signUpUserThunk} from '../redux/modules/userSlice';
+import backImg from '../img/back.png';
+import goldenKing from '../img/goldenKing.png';
+import Layout from '../components/Layout';
+import styled from 'styled-components';
+import Comment from './Comment';
+import ReactStars from 'react-rating-stars-component';
+import ReactHtmlParser from 'react-html-parser';
+import CommentInput from '../components/CommentInput';
+import CommentList from '../components/CommentList';
 
 export default function Post() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log("detailpost", detailPost);
-
-  // useEffect(() => {
-  //   console.log(location.pathname);
-  // }, [location]);
+  console.log(detailPost)
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
-    // console.log(123, "123");
     dispatch(__getPostViewThunk(location.pathname));
   }, [dispatch]);
+
+  const onClickDeletePostHandler = () => {
+    const result = window.confirm('삭제하시겠습니까?');
+    if (result) {
+      dispatch(__deletePost(detailPost.id));
+    } else {
+      return;
+    }
+
+    navigate('/');
+  };
 
   return (
     <Layout>
@@ -34,7 +42,7 @@ export default function Post() {
         onClick={() => {
           navigate(-1);
         }}
-        type="button"
+        type='button'
       >
         <ImgBox src={backImg} />
       </ImgButton>
@@ -44,7 +52,7 @@ export default function Post() {
             <Title>{ReactHtmlParser(detailPost.title)}</Title>
             <br />
             <UserInfo>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{display: 'flex', alignItems: 'center'}}>
                 <GoldenImg src={goldenKing} />
                 <UserName>{detailPost.user_id}&nbsp;&nbsp;</UserName>
                 &nbsp;&nbsp;
@@ -52,47 +60,26 @@ export default function Post() {
               <ReactStars
                 count={detailPost.rate}
                 size={30}
-                color="#F2D589"
-                activeColor="#F2D589"
+                color='#F2D589'
+                activeColor='#F2D589'
               ></ReactStars>
             </UserInfo>
             <Intro>
               나의 리뷰소개
-              <Button>
-                <button
-                  style={{
-                    display: "block",
-                    backgroundColor: "#ffcd00",
-                    color: "#3E2723",
-                    borderRadius: "8px",
-                    width: "52px",
-                    fontWeight: "bold",
-                    borderColor: "#FFB300",
-                    boxShadow: "0px 1px 1px 0px black",
-                    fontSize: "15px",
-                  }}
-                  onClick={() => {
-                    navigate(`/write/${detailPost.id}`);
-                  }}
-                >
-                  수정
-                </button>
-                <button
-                  style={{
-                    display: "block",
-                    backgroundColor: "#ffcd00",
-                    color: "#3E2723",
-                    borderRadius: "8px",
-                    width: "52px",
-                    fontWeight: "bold",
-                    borderColor: "#FFB300",
-                    boxShadow: "0px 1px 1px 0px black",
-                    fontSize: "15px",
-                  }}
-                >
-                  삭제
-                </button>
-              </Button>
+              {user && detailPost.user_id === user.id && (
+                <Button>
+                  <EditButton
+                    onClick={() => {
+                      navigate(`/write/${detailPost.id}`);
+                    }}
+                  >
+                    수정
+                  </EditButton>
+                  <DeleteButton onClick={onClickDeletePostHandler}>
+                    삭제
+                  </DeleteButton>
+                </Button>
+              )}
             </Intro>
 
             <Contents>{ReactHtmlParser(detailPost.content)}</Contents>
@@ -105,6 +92,30 @@ export default function Post() {
     </Layout>
   );
 }
+
+const EditButton = styled.button`
+  display: block;
+  background-color: #ffcd00;
+  color: #3e2723;
+  border-radius: 8px;
+  width: 52px;
+  font-weight: bold;
+  border-color: #ffb300;
+  box-shadow: 0px 1px 1px 0px black;
+  font-size: 15px;
+`;
+
+const DeleteButton = styled.button`
+  display: block;
+  background-color: #ffcd00;
+  color: #3e2723;
+  border-radius: 8px;
+  width: 52px;
+  font-weight: bold;
+  border-color: #ffb300;
+  box-shadow: 0px 1px 1px 0px black;
+  font-size: 15px;
+`;
 
 const ImgButton = styled.div``;
 const ImgBox = styled.img`
