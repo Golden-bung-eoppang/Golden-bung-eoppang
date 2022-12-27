@@ -4,10 +4,8 @@ import axios from "axios";
 export const __getPostViewThunk = createAsyncThunk(
   "GET_POSTS",
   async (id, thunkAPI) => {
-    console.log("id", id);
     try {
       const { data } = await axios.get(`http://localhost:3001/posts${id}`);
-      console.log(data);
       return thunkAPI.fulfillWithValue(data); //action.payload이다.
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);

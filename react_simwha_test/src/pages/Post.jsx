@@ -6,23 +6,20 @@ import backImg from "../img/back.png";
 import goldenKing from "../img/goldenKing.png";
 import Layout from "../components/Layout";
 import styled from "styled-components";
-import Comment from "./Comment";
 import ReactStars from "react-rating-stars-component";
 import ReactHtmlParser from "react-html-parser";
+import CommentInput from "./CommentInput";
+import CommentList from "./CommentList";
 
 export default function Post() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log(detailPost);
+
+  useEffect(() => {}, [location]);
 
   useEffect(() => {
-    console.log(location.pathname);
-  }, [location]);
-
-  useEffect(() => {
-    console.log(123, "123");
     dispatch(__getPostViewThunk(location.pathname));
   }, [dispatch]);
 
@@ -93,7 +90,8 @@ export default function Post() {
           </>
         )}
       </PageContainer>
-      <Comment />
+      <CommentInput />
+      <CommentList />
     </Layout>
   );
 }
