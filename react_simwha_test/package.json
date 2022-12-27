@@ -26,6 +26,7 @@
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.6",
     "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13",
     "weather-styled-icon": "^3.3.4",
     "web-vitals": "^2.1.0"
   },
