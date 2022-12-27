@@ -9,6 +9,8 @@ import styled from "styled-components";
 import Comment from "./Comment";
 import ReactStars from "react-rating-stars-component";
 import ReactHtmlParser from "react-html-parser";
+import CommentInput from "../components/CommentInput";
+import CommentList from "../components/CommentList";
 
 export default function Post() {
   const navigate = useNavigate();
@@ -36,7 +38,6 @@ export default function Post() {
       >
         <ImgBox src={backImg} />
       </ImgButton>
-
       <PageContainer>
         {detailPost && (
           <>
@@ -94,6 +95,8 @@ export default function Post() {
         )}
       </PageContainer>
       <Comment />
+      <CommentInput />
+      <CommentList />
     </Layout>
   );
 }

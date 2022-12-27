@@ -316,10 +316,39 @@
   ],
   "comments": [
     {
-      "comment_id": 1519129853500,
-      "id": 1519211810362,
-      "user_id": 1519211809934,
-      "content": "댓글내용"
+      "comment_id": "post",
+      "content": "ㅁ",
+      "id": 1672105159099,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T01:46:26.531Z"
+    },
+    {
+      "comment_id": "post",
+      "content": "호ㅓ러ㅗ호ㅓ",
+      "id": 1672105188483,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T01:39:48.483Z"
+    },
+    {
+      "comment_id": "post",
+      "content": "ㄴㄹㄴㅁㅇㄹㄴㄹ",
+      "id": 1672105190531,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T01:39:50.531Z"
+    },
+    {
+      "comment_id": "post",
+      "content": "ㅁㄴㅇ",
+      "id": 1672106938914,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T02:08:58.915Z"
+    },
+    {
+      "comment_id": "1671780924184",
+      "content": "ㅁㄴㅇㄻ",
+      "id": 1672109963358,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T02:59:23.358Z"
     }
   ]
 }
