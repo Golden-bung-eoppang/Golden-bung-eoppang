@@ -121,19 +121,19 @@
       "title": "이게 맨 첫번째로 올까?ㅎㅎㅎㅎ",
       "content": "<p>시도해보자 !!!ㅁㅁㅁ</p>",
       "rate": 0
+    },
+    {
+      "user_id": "test123",
+      "id": "292f4c9c-df3d-4e09-ab77-f44392c0ffb3",
+      "title": "첫번째~~~",
+      "content": "<p>첫번째~~~첫번째~~~첫번째~~~첫번째~~~</p>",
+      "rate": 5
     }
   ],
   "comments": [
     {
       "comment_id": "post",
-      "content": "ㄴㄹㄴㅁㅇㄹㄴㄹ",
-      "id": 1672105190531,
-      "username": "엄준식",
-      "createdAt": "2022-12-27T01:39:50.531Z"
-    },
-    {
-      "comment_id": "post",
-      "content": "ㅁㄴㅇ",
+      "content": "ㅂㅈㄷㄱㅂㅈㄷㄱ",
       "id": 1672106938914,
       "username": "엄준식",
       "createdAt": "2022-12-27T02:08:58.915Z"
@@ -144,6 +144,13 @@
       "id": 1672109963358,
       "username": "엄준식",
       "createdAt": "2022-12-27T02:59:23.358Z"
+    },
+    {
+      "comment_id": "292f4c9c-df3d-4e09-ab77-f44392c0ffb3",
+      "content": "ㅂㅈㄷㄱㅂㅈㄷ",
+      "id": 1672124470109,
+      "username": "엄준식",
+      "createdAt": "2022-12-27T07:01:10.109Z"
     }
   ]
 }

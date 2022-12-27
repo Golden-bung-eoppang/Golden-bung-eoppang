@@ -52,7 +52,7 @@ const Home = () => {
         <ScrollToTop />
         <InputGroup className="mb-3">
           <Form.Control
-            placeholder="검색하고 싶은 제목, 내용, 닉네임을 입력하세요"
+            placeholder="검색하고 싶은 제목이나 내용, 아이디를 입력하세요"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
             style={{ height: "60px", fontSize: "20px" }}
@@ -63,7 +63,16 @@ const Home = () => {
         <SortBox>
           <DropdownButton id="dropdown-item-button" title="---정렬---">
             <Dropdown.Item as="button">전체</Dropdown.Item>
-            <Dropdown.Item as="button">평점순</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                const rateChart = [...posts]
+                  .sort((a, b) => a.rate - b.rate)
+                  .reverse();
+              }}
+              as="button"
+            >
+              평점순
+            </Dropdown.Item>
           </DropdownButton>
         </SortBox>
         {/* 글목록 */}
@@ -107,7 +116,6 @@ const MainBox = styled.main`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100vh;
 `;
 const SortBox = styled.section`
   display: flex;
