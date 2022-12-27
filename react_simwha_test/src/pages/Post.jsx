@@ -1,24 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useLocation, useNavigate} from 'react-router-dom';
-import {__deletePost, __getPostViewThunk} from '../redux/modules/postViewSlice';
-import {signUpUserThunk} from '../redux/modules/userSlice';
-import backImg from '../img/back.png';
-import goldenKing from '../img/goldenKing.png';
-import Layout from '../components/Layout';
-import styled from 'styled-components';
-import Comment from './Comment';
-import ReactStars from 'react-rating-stars-component';
-import ReactHtmlParser from 'react-html-parser';
-import CommentInput from '../components/CommentInput';
-import CommentList from '../components/CommentList';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  __deletePost,
+  __getPostViewThunk,
+} from "../redux/modules/postViewSlice";
+import backImg from "../img/back.png";
+import goldenKing from "../img/goldenKing.png";
+import Layout from "../components/Layout";
+import styled from "styled-components";
+import ReactStars from "react-rating-stars-component";
+import ReactHtmlParser from "react-html-parser";
+import CommentInput from "./CommentInput";
+import CommentList from "./CommentList";
 
 export default function Post() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const detailPost = useSelector((state) => state.posts.detailPost);
-  console.log(detailPost)
+
+  useEffect(() => {}, [location]);
+
   const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
@@ -26,14 +29,14 @@ export default function Post() {
   }, [dispatch]);
 
   const onClickDeletePostHandler = () => {
-    const result = window.confirm('삭제하시겠습니까?');
+    const result = window.confirm("삭제하시겠습니까?");
     if (result) {
       dispatch(__deletePost(detailPost.id));
     } else {
       return;
     }
 
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -42,7 +45,7 @@ export default function Post() {
         onClick={() => {
           navigate(-1);
         }}
-        type='button'
+        type="button"
       >
         <ImgBox src={backImg} />
       </ImgButton>
@@ -52,7 +55,7 @@ export default function Post() {
             <Title>{ReactHtmlParser(detailPost.title)}</Title>
             <br />
             <UserInfo>
-              <div style={{display: 'flex', alignItems: 'center'}}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <GoldenImg src={goldenKing} />
                 <UserName>{detailPost.user_id}&nbsp;&nbsp;</UserName>
                 &nbsp;&nbsp;
@@ -60,8 +63,8 @@ export default function Post() {
               <ReactStars
                 count={detailPost.rate}
                 size={30}
-                color='#F2D589'
-                activeColor='#F2D589'
+                color="#F2D589"
+                activeColor="#F2D589"
               ></ReactStars>
             </UserInfo>
             <Intro>
@@ -86,7 +89,6 @@ export default function Post() {
           </>
         )}
       </PageContainer>
-      <Comment />
       <CommentInput />
       <CommentList />
     </Layout>

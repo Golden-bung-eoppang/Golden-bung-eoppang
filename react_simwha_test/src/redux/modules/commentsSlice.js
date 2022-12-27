@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const __getCommentsThunk = createAsyncThunk(
-  "GET_COMMENTS",
-  async (_, thunkAPI) => {
+export const __getCommnetsByTodoId = createAsyncThunk(
+  "GET_COMMENT_BY_TODO_ID",
+  async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/comments`);
+      const { data } = await axios.get(
+        `http://localhost:3001/comments?comment_id=${arg}`
+      );
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -61,24 +64,24 @@ export const commentsSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
-    clearTodo: (state) => {
-      state.comments = null;
+    clearComment: (state) => {
+      state.comments.data = [];
     },
   },
   extraReducers: {
-    // 전체 댓글 조회
-    [__getCommentsThunk.pending]: (state) => {
+    // 댓글 조회
+    [__getCommnetsByTodoId.pending]: (state) => {
       state.comments.isLoading = true;
     },
-    [__getCommentsThunk.fulfilled]: (state, action) => {
+    [__getCommnetsByTodoId.fulfilled]: (state, action) => {
       state.comments.isLoading = false;
       state.comments.data = action.payload;
     },
-    [__getCommentsThunk.rejected]: (state, action) => {
+    [__getCommnetsByTodoId.rejected]: (state, action) => {
       state.comments.isLoading = false;
       state.comments.error = action.payload;
     },
-    // 댓글
+    // 댓글 추가
     [__addComment.pending]: (state) => {
       state.comments.isLoading = true;
     },
@@ -96,7 +99,6 @@ export const commentsSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.comments.isLoading = false;
-      console.log(action);
       const target = state.comments.data.findIndex(
         (comment) => comment.id === action.payload
       );

@@ -17,5 +17,6 @@ const StLayout = styled.div`
   background-color: ${({ bgColor }) => {
     return bgColor;
   }};
+
   padding: 24px 0;
 `;

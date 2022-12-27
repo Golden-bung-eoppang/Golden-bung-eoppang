@@ -25,7 +25,15 @@ const reducers = combineReducers({
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    user,
+    posts,
+    comments,
+    persistedReducer,
+    modal,
+    addupdateSlice,
+    mainupdateSlice,
+  },
 });
 
 export default store;

@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import {
-  Button,
-  Dropdown,
-  DropdownButton,
-  Form,
-  InputGroup,
-} from "react-bootstrap";
+import { Dropdown, DropdownButton, Form, InputGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPostThunk } from "../redux/modules/mainupdateSlice";
 import ReactHtmlParser from "react-html-parser";
@@ -20,26 +14,30 @@ import inga from "../img/inga_bbang.jpg";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [userInput, setUserInput] = useState("");
   const { posts, isLoading } = useSelector((state) => state.mainupdateSlice);
+  const [searched, setSearched] = useState([]);
+
+  useEffect(() => {
+    setSearched([...posts]);
+  }, [posts]);
 
   const getValue = (e) => {
-    e.preventDefault();
-    setUserInput(e.target.value.toLowerCase("posts"));
+    const aa = e.target.value.toLowerCase("posts");
+    setSearched(
+      posts.filter(
+        (item) =>
+          item.content.toLowerCase().includes(aa) ||
+          item.title.toLowerCase().includes(aa) ||
+          item.user_id.toLowerCase().includes(aa)
+      )
+    );
   };
-
-  const searched = posts.filter(
-    (item) =>
-      item.content.toLowerCase().includes(userInput) ||
-      item.title.toLowerCase().includes(userInput) ||
-      item.user_id.toLowerCase().includes(userInput)
-  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getPostThunk());
-  }, [dispatch]);
+  }, []);
   if (isLoading) {
     return "로딩중....";
   }
@@ -62,12 +60,17 @@ const Home = () => {
 
         <SortBox>
           <DropdownButton id="dropdown-item-button" title="---정렬---">
-            <Dropdown.Item as="button">전체</Dropdown.Item>
             <Dropdown.Item
               onClick={() => {
-                const rateChart = [...posts]
-                  .sort((a, b) => a.rate - b.rate)
-                  .reverse();
+                setSearched([...posts]);
+              }}
+              as="button"
+            >
+              전체
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setSearched([...posts].sort((a, b) => a.rate - b.rate));
               }}
               as="button"
             >
@@ -116,6 +119,7 @@ const MainBox = styled.main`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: 100vh;
 `;
 const SortBox = styled.section`
   display: flex;
