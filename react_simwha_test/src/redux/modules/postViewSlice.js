@@ -8,7 +8,6 @@ export const __getPostViewThunk = createAsyncThunk(
     // console.log("id", id);
     try {
       const { data } = await axios.get(`http://localhost:3001/posts${id}`);
-      console.log('getpostdata',data);
       return thunkAPI.fulfillWithValue(data); //action.payload이다.
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -16,6 +15,18 @@ export const __getPostViewThunk = createAsyncThunk(
   }
 );
 
+export const __deletePost = createAsyncThunk(
+  'DELETE_POST',
+  async (arg, thunkAPI) => {
+    try {
+      await axios.delete(`http://localhost:3001/posts/${arg}`);
+      console.log(arg);
+      return thunkAPI.fulfillWithValue(arg);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
 // export const __updateTodoThunk = createAsyncThunk(
 //   "UPDATE_TODO",
 //   async (arg, thunkAPI) => {
@@ -36,7 +47,7 @@ const initialState = {
 };
 
 export const postViewSlice = createSlice({
-  name: "posts",
+  name: 'posts',
   initialState,
   reducers: {
     clearPosts: (state) => {
@@ -53,7 +64,7 @@ export const postViewSlice = createSlice({
     [__getPostViewThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.detailPost = action.payload;
-      console.log('action',action.payload);
+
     },
     [__getPostViewThunk.rejected]: (state, action) => {
       state.isLoading = false;
@@ -62,17 +73,18 @@ export const postViewSlice = createSlice({
     [__getPostViewThunk.pending]: (state) => {
       state.isLoading = true;
     },
-    // [__updateTodoThunk.fulfilled]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.todo = action.payload;
-    // },
-    // [__updateTodoThunk.pending]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [__updateTodoThunk.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
+    [__deletePost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deletePost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.detailPost = action.payload;
+      console.log('action', action.payload);
+    },
+    [__deletePost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
