@@ -8,6 +8,7 @@ function CommentList() {
   const { data } = useSelector((state) => state.comments.comments);
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(__getCommnetsByTodoId(id));
   }, [id]);

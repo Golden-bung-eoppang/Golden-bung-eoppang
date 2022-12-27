@@ -6,7 +6,7 @@ export const __addWriteThunk = createAsyncThunk(
   "ADD_WRITE", // action value
   async (payload, thunkAPI) => {
     // 콜백함수
-    console.log("payload", payload);
+    // console.log("payload", payload);
     try {
       const { data } = await axios.post(`http://localhost:3001/posts`, payload);
       return thunkAPI.fulfillWithValue(data);
