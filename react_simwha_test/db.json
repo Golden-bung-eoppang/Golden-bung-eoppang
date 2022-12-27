@@ -9,6 +9,11 @@
       "id": "test12345",
       "password": -1224620319,
       "username": "김미영test"
+    },
+    {
+      "id": "test11111",
+      "password": -1224652129,
+      "username": "김미영11111"
     }
   ],
   "posts": [
@@ -424,6 +429,41 @@
       "title": "이게 맨 첫번째로 올까?",
       "content": "<p>시도해보자 !!!</p>",
       "rate": 4
+    },
+    {
+      "user_id": "",
+      "id": 1672116897596,
+      "title": "이게 맨 첫번째로 올까?tt",
+      "content": "<p>시도해보자 !!!aa</p>",
+      "rate": 0
+    },
+    {
+      "user_id": "test12345",
+      "id": "bb5cfeb2-08ee-4152-be76-fa248dc1fa72",
+      "title": "유저ID가 나올까?",
+      "content": "<p>데이터를 확인해보자</p>",
+      "rate": 3
+    },
+    {
+      "user_id": "test11111",
+      "id": "092ec165-eb5a-4ffd-a030-913e72f5d92b",
+      "title": "유저id가 나올까?2",
+      "content": "<p>ㅎㅎㅎ</p>",
+      "rate": 0
+    },
+    {
+      "user_id": "test11111",
+      "id": "ce94295c-d589-4b38-9655-eab2b99a3fd6",
+      "title": "131313",
+      "content": "<p>1343434</p>",
+      "rate": 4
+    },
+    {
+      "user_id": "",
+      "id": 1672118082965,
+      "title": "이게 맨 첫번째로 올까?ㅎㅎㅎㅎ",
+      "content": "<p>시도해보자 !!!ㅁㅁㅁ</p>",
+      "rate": 0
     }
   ],
   "comments": [
