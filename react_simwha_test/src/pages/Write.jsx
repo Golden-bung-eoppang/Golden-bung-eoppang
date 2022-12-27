@@ -3,10 +3,7 @@ import ReactStars from "react-rating-stars-component";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import Editor from "../components/Editor";
-import {
-  __addWriteThunk,
-  __getPostThunk,
-} from "../redux/modules/addupdateSlice";
+import { __addWriteThunk } from "../redux/modules/postViewSlice";
 import { signUpUserThunk } from "../redux/modules/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
