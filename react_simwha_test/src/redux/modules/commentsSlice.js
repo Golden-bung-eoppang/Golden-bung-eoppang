@@ -8,7 +8,6 @@ export const __getCommnetsByTodoId = createAsyncThunk(
       const { data } = await axios.get(
         `http://localhost:3001/comments?post_id=${arg}`
       );
-      console.log("data", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);

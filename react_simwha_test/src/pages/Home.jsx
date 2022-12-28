@@ -119,7 +119,7 @@ const Home = () => {
                   </RatingBox>
                   <TitleBox>{posts.title}</TitleBox>
                   <ContentBox>{ReactHtmlParser(posts.content)}</ContentBox>
-                  <UserNameBox>{posts.user_id}</UserNameBox>
+                  <UserNameBox>{posts.username}</UserNameBox>
                 </Item>
                 // 잔여연산자 사용
               ))}

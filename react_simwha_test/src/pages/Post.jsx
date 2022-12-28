@@ -60,7 +60,7 @@ export default function Post() {
             <UserInfo>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <GoldenImg src={goldenKing} />
-                <UserName>{detailPost.user_id}&nbsp;&nbsp;</UserName>
+                <UserName>{detailPost.username}&nbsp;&nbsp;</UserName>
                 &nbsp;&nbsp;
               </div>
               {/* <ReactStars

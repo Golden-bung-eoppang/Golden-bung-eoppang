@@ -17,6 +17,7 @@ const Write = () => {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const userID = useSelector((state) => state.user.user.id);
+  const username = useSelector((state) => state.user.user.username);
 
   // console.log("userID", userID);
 
@@ -43,6 +44,7 @@ const Write = () => {
       content,
       rate,
       read: 0,
+      username,
     };
 
     dispatch(__addWriteThunk(newpost));
